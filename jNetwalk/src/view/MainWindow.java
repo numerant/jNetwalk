@@ -52,8 +52,8 @@ public class MainWindow
     {
         createMainWindow();
         createMainMenu();
-        createStatusBar();
         showMaze(6);            //TODO Should be disabled by default
+        createStatusBar();      //TODO Status bar should be shown after maze
         frame.setVisible(true);
         frame.setResizable(false);
     }
