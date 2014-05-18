@@ -1,11 +1,14 @@
 package view;
 
 import javax.swing.*;
+
 import java.awt.*;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
 import net.miginfocom.swing.MigLayout;
 
 
@@ -13,6 +16,7 @@ import net.miginfocom.swing.MigLayout;
 public class MainWindow
 {
     private JFrame frame;
+    
     private JMenuBar menuBar;
     private JMenu gameMenu;
     private JMenuItem newGameMenuItem;
@@ -22,22 +26,42 @@ public class MainWindow
     private JMenuItem howToPlayMenuItem;
     private JMenuItem aboutMenuItem;
     
+    private JPanel statusBarPanel;
+    private JLabel timeLabel;
+    private JLabel timeValue;
+    private JLabel moveCountLabel;
+    private JLabel moveCountValue;
+    
+    private JPanel gamePanel;
+    
+    private class NetwalkButton extends JButton
+    {
+        private Integer xPosition;
+        private Integer yPosition;
+        
+        public NetwalkButton(final String string, final Integer xPosition, final Integer yPosition)
+        {
+            super(string);
+            this.xPosition = xPosition;
+            this.yPosition = yPosition;
+        }
+    }
 
     /**
-     * Create the application.
+     * Creates the application main window.
      */
     public MainWindow()
     {
         createMainWindow();
         createMainMenu();
         createStatusBar();
-        initialize();
+        showMaze(6);
         frame.setVisible(true);
         frame.setResizable(false);
     }
 
     /**
-     * Initialize the contents of the frame.
+     * Initializes the content of the frame.
      */
     private void createMainWindow()
     {
@@ -56,9 +80,8 @@ public class MainWindow
     }
     
     /**
-     * Create main menu on top of the window
+     * Creates main menu on top of the window
      */
-    
     private void createMainMenu()
     {
         menuBar = new JMenuBar();
@@ -87,46 +110,47 @@ public class MainWindow
         frame.getContentPane().setLayout(new BorderLayout(0, 0));
     }
     
+    /**
+     * Creates and shows status bar with current score
+     */
     private void createStatusBar()
     {
-        JPanel panel = new JPanel();
-        frame.getContentPane().add(panel, BorderLayout.SOUTH);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        statusBarPanel = new JPanel();
+        frame.getContentPane().add(statusBarPanel, BorderLayout.SOUTH);
+        statusBarPanel.setLayout(new BoxLayout(statusBarPanel, BoxLayout.X_AXIS));
         
-        JLabel lblTime = new JLabel("Time:");
-        panel.add(lblTime);
+        timeLabel = new JLabel("Time:");
+        statusBarPanel.add(timeLabel);
         
-        JLabel lblTime_1 = new JLabel("TIME");
-        lblTime_1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(lblTime_1);
+        timeValue = new JLabel("");
+        timeValue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        statusBarPanel.add(timeValue);
         
-        Component horizontalGlue = Box.createHorizontalGlue();
-        panel.add(horizontalGlue);
+        statusBarPanel.add(Box.createHorizontalGlue());
         
-        JLabel lblMoveCount = new JLabel("Move count:");
-        lblMoveCount.setHorizontalAlignment(SwingConstants.LEFT);
-        panel.add(lblMoveCount);
+        moveCountLabel = new JLabel("Move count:");
+        moveCountLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        statusBarPanel.add(moveCountLabel);
         
-        JLabel lblCount = new JLabel("COUNT");
-        panel.add(lblCount);
+        moveCountValue = new JLabel("");
+        statusBarPanel.add(moveCountValue);
     }
     
-    private void initialize()
+    /**
+     * Shows generated maze on the screen
+     * @param size Count of rows and columns
+     */
+    private void showMaze(final Integer size)
     {
-
+        gamePanel = new JPanel();
+        frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
+        gamePanel.setLayout(new GridLayout(size, size, 0, 0));
         
-
-        
-
-        
-        JPanel panel_1 = new JPanel();
-        frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-        panel_1.setLayout(new GridLayout(5, 5, 0, 0));
-        
-        for (int i=0; i<25; i++)
-        {
-            panel_1.add(new JButton("New button"));
-        }
+        for (int xCurrent=0; xCurrent<size; xCurrent++)
+            for (int yCurrent=0; yCurrent<size; yCurrent++)
+            {
+                gamePanel.add(new NetwalkButton("New button", xCurrent, yCurrent));
+            }
         
 
     }
