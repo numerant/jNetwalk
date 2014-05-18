@@ -1,22 +1,12 @@
 package view;
 
 import javax.swing.*;
-
 import java.awt.*;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-
-import net.miginfocom.swing.MigLayout;
-
-
 
 public class MainWindow
 {
     private JFrame frame;
-    
+        /* Menu bar related */
     private JMenuBar menuBar;
     private JMenu gameMenu;
     private JMenuItem newGameMenuItem;
@@ -25,20 +15,28 @@ public class MainWindow
     private JMenu helpMenu;
     private JMenuItem howToPlayMenuItem;
     private JMenuItem aboutMenuItem;
-    
+        /* Status bar related */
     private JPanel statusBarPanel;
     private JLabel timeLabel;
     private JLabel timeValue;
     private JLabel moveCountLabel;
     private JLabel moveCountValue;
-    
+        /* Panel containing maze */
     private JPanel gamePanel;
     
+    
+        /**
+         *  Internal class for representing a button aware of its maze position
+         */
     private class NetwalkButton extends JButton
     {
+        private static final long serialVersionUID = 1L;    // to suppress warnings
         private Integer xPosition;
         private Integer yPosition;
         
+        /**
+         * Constructor - sets button caption and maze position
+         */
         public NetwalkButton(final String string, final Integer xPosition, final Integer yPosition)
         {
             super(string);
@@ -55,7 +53,7 @@ public class MainWindow
         createMainWindow();
         createMainMenu();
         createStatusBar();
-        showMaze(6);
+        showMaze(6);            //TODO Should be disabled by default
         frame.setVisible(true);
         frame.setResizable(false);
     }
