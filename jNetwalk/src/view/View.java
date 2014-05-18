@@ -13,5 +13,10 @@ import model.Model;
 public class View
 {
     //TODO Add event queue
+    public View()
+    {
+        MainWindow mainWindow = new MainWindow();
+        
+    }
     
 }
