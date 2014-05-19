@@ -1,9 +1,11 @@
 package view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class MainWindow
 {
@@ -26,7 +28,7 @@ public class MainWindow
         /* Panel containing maze */
     private JPanel gamePanel;
     
-    private static final Integer BUTTON_SIZE_PX = 64;
+    private static final Integer BUTTON_SIZE_PX = 80;
     
     
         /**
@@ -56,7 +58,7 @@ public class MainWindow
     {
         createMainWindow();
         createMainMenu();
-        showMaze(4);                //TODO Should be disabled by default
+        showMaze(6);                //TODO Should be disabled by default
         createStatusBar();          //TODO Status bar should be shown after maze
         frame.setVisible(true);
         frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
@@ -152,12 +154,22 @@ public class MainWindow
         frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
         gamePanel.setLayout(new GridLayout(size, size, 0, 0));
         
-        
         for (int yCurrent=0; yCurrent<size; yCurrent++)
             for (int xCurrent=0; xCurrent<size; xCurrent++)
             {
-                final NetwalkButton newButton = new NetwalkButton("New button", xCurrent, yCurrent);
+                final NetwalkButton newButton = new NetwalkButton("", xCurrent, yCurrent);
                 newButton.setPreferredSize(new Dimension(BUTTON_SIZE_PX, BUTTON_SIZE_PX));
+                try 
+                {
+                    Image img = ImageIO.read(getClass().getResource("/resources/bmp/internet.png"));
+                    if ((yCurrent + xCurrent +1)%3 == 1)
+                        img = ImageIO.read(getClass().getResource("/resources/bmp/computer.png"));
+                    newButton.setIcon(new ImageIcon(img));
+                } 
+                catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
                 gamePanel.add(newButton);
                 newButton.addActionListener(new ActionListener()
                 {
