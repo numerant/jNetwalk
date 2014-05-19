@@ -36,6 +36,7 @@ public class Main
                 controller = new Controller(model, view);
             }
         });
+        
     }
 
 }

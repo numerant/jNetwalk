@@ -1,7 +1,9 @@
 package view;
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.*;
 
 public class MainWindow
 {
@@ -23,6 +25,8 @@ public class MainWindow
     private JLabel moveCountValue;
         /* Panel containing maze */
     private JPanel gamePanel;
+    
+    private static final Integer BUTTON_SIZE_PX = 64;
     
     
         /**
@@ -52,10 +56,10 @@ public class MainWindow
     {
         createMainWindow();
         createMainMenu();
-        showMaze(6);            //TODO Should be disabled by default
-        createStatusBar();      //TODO Status bar should be shown after maze
+        showMaze(4);                //TODO Should be disabled by default
+        createStatusBar();          //TODO Status bar should be shown after maze
         frame.setVisible(true);
-        frame.setResizable(false);
+        frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
     }
 
     /**
@@ -66,15 +70,19 @@ public class MainWindow
         try 
         {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");     //TODO Make it multiplatform
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } 
         catch (Exception e) 
         {
             e.printStackTrace();
         }
         
+            /* Some frame properties - default size and positioning */
         frame = new JFrame();
-        frame.setBounds(100, 100, 574, 494);
+        frame.setSize(400, 400);
+        frame.setLocationByPlatform(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
     
     /**
@@ -144,13 +152,23 @@ public class MainWindow
         frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
         gamePanel.setLayout(new GridLayout(size, size, 0, 0));
         
-        for (int xCurrent=0; xCurrent<size; xCurrent++)
-            for (int yCurrent=0; yCurrent<size; yCurrent++)
+        
+        for (int yCurrent=0; yCurrent<size; yCurrent++)
+            for (int xCurrent=0; xCurrent<size; xCurrent++)
             {
-                gamePanel.add(new NetwalkButton("New button", xCurrent, yCurrent));
+                final NetwalkButton newButton = new NetwalkButton("New button", xCurrent, yCurrent);
+                newButton.setPreferredSize(new Dimension(BUTTON_SIZE_PX, BUTTON_SIZE_PX));
+                gamePanel.add(newButton);
+                newButton.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent event)
+                    {
+                        JOptionPane.showMessageDialog(null, newButton.xPosition.toString());
+                    }
+                });
             }
         
-
+        frame.pack();
     }
 
 }
