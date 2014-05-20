@@ -4,11 +4,11 @@
  * @author Jakub Maleszewski
  */
 
-package controller;
 
 import java.awt.EventQueue;
 import model.Model;
 import view.View;
+import controller.Controller;
 
 /**
  * @author Jakub Maleszewski
