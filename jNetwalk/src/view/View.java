@@ -2,9 +2,11 @@ package view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 
 /**
@@ -15,6 +17,26 @@ import java.io.IOException;
  */
 public class View
 {
+    /**
+     *  Internal class for representing a button aware of its maze position
+     */
+    private class NetwalkButton extends JButton
+    {
+        private static final long serialVersionUID = 1L;    // to suppress warnings
+        private Integer xPosition;
+        private Integer yPosition;
+        
+        /**
+         * Constructor - sets button caption and maze position
+         */
+        public NetwalkButton(final String string, final Integer xPosition, final Integer yPosition)
+        {
+            super(string);
+            this.xPosition = xPosition;
+            this.yPosition = yPosition;
+        }
+    }
+    
     private JFrame frame;
         /* Menu bar related */
     private JMenuBar menuBar;
@@ -33,31 +55,28 @@ public class View
     private JLabel moveCountValue;
         /* Panel containing maze */
     private JPanel gamePanel;
+    private NetwalkButton[][] mazeButtons;
     
     private static final Integer BUTTON_SIZE_PX = 80;
     
+    /**
+     * Constructor - calls (in EDT) method responsible for creation of GUI
+     */
     public View()
     {
-        createAndShowGUI();
-    }
-    
-        /**
-         *  Internal class for representing a button aware of its maze position
-         */
-    private class NetwalkButton extends JButton
-    {
-        private static final long serialVersionUID = 1L;    // to suppress warnings
-        private Integer xPosition;
-        private Integer yPosition;
-        
-        /**
-         * Constructor - sets button caption and maze position
-         */
-        public NetwalkButton(final String string, final Integer xPosition, final Integer yPosition)
+        try
         {
-            super(string);
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
+            EventQueue.invokeAndWait(new Runnable()
+            {
+                public void run() 
+                {
+                    createAndShowGUI();
+                }
+            });
+        }
+        catch (InvocationTargetException | InterruptedException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -155,7 +174,8 @@ public class View
     }
     
     /**
-     * Shows generated maze on the screen
+     * Shows generated maze on the screen.
+     * Creates array of buttons.
      * @param size Count of rows and columns
      */
     private void showMaze(final Integer size)
@@ -163,6 +183,9 @@ public class View
         gamePanel = new JPanel();
         frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
         gamePanel.setLayout(new GridLayout(size, size, 0, 0));
+        
+        mazeButtons = new NetwalkButton[size][size];
+        
         
         for (int yCurrent=0; yCurrent<size; yCurrent++)
             for (int xCurrent=0; xCurrent<size; xCurrent++)
@@ -180,7 +203,6 @@ public class View
                 {
                     ex.printStackTrace();
                 }
-                gamePanel.add(newButton);
                 newButton.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent event)
@@ -188,6 +210,9 @@ public class View
                         JOptionPane.showMessageDialog(null, newButton.xPosition.toString());
                     }
                 });
+                
+                gamePanel.add(newButton);
+                mazeButtons[xCurrent][yCurrent] = newButton;
             }
         
         frame.pack();

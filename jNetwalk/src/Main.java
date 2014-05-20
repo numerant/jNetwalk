@@ -27,16 +27,9 @@ public class Main
      */
     public static void main(String[] args)
     {    
-        EventQueue.invokeLater(new Runnable()       // TODO Check if invokeAndWait isn't better than this
-        {
-            public void run() 
-            {
-                model = new Model(view);
-                view = new View();
-                controller = new Controller(model, view);
-            }
-        });
-        
+        model = new Model(view);
+        view = new View();
+        controller = new Controller(model, view);
     }
 
 }
