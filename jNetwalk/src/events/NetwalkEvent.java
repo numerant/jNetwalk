@@ -7,7 +7,10 @@ package events;
  * @since 2014-05-25
  */
 
-public abstract class NetwalkEvent<type>
+public abstract class NetwalkEvent
 {
-    
+    /*
+     * Abstract process() method describes what should be done in response to the event. It is called from the controller.
+     */
+    public abstract void process();
 }
