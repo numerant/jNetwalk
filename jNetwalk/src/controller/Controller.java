@@ -38,7 +38,25 @@ public class Controller
     {
         while(true)
         {
+            try
+            {
+                NetwalkEvent<?> newEvent = eventQueue.take();
+                processEvent(newEvent);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
             
         }
     }
+    
+    /**
+     * Method responsible for processing event from the queue. Calls model and view, if necessary.
+     */
+    private void processEvent(NetwalkEvent<?> newEvent)
+    {
+        //TODO Call model and view here
+    }
+    
 }
