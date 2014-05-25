@@ -3,6 +3,8 @@ package view;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import events.NetwalkEvent;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class View
         }
     }
         /* Event queue */
-    private BlockingQueue<Object> eventQueue; 
+    private BlockingQueue<NetwalkEvent> eventQueue; 
         /* Main frame */
     private JFrame frame;
         /* Menu bar related */
@@ -64,7 +66,7 @@ public class View
     /**
      * Constructor - calls (in EDT) method responsible for creation of GUI
      */
-    public View(final BlockingQueue<Object> eventQueue)     // TODO Replace Object with Event
+    public View(final BlockingQueue<NetwalkEvent> eventQueue)
     {
         this.eventQueue = eventQueue;
         

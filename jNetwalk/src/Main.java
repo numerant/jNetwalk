@@ -7,10 +7,10 @@
 
 import java.awt.EventQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import model.Model;
 import view.View;
 import controller.Controller;
+import events.NetwalkEvent;
 
 /**
  * @author Jakub Maleszewski
@@ -20,7 +20,7 @@ import controller.Controller;
  */
 public class Main
 {
-    private static LinkedBlockingQueue<Object> eventQueue;      //TODO Replace Object with "Event"
+    private static LinkedBlockingQueue<NetwalkEvent> eventQueue;     
     private static Model model;
     private static View view;
     private static Controller controller;
@@ -30,10 +30,10 @@ public class Main
      */
     public static void main(String[] args)
     {    
-        eventQueue = new LinkedBlockingQueue<Object>();
+        eventQueue = new LinkedBlockingQueue<NetwalkEvent>();
         model = new Model(view);
         view = new View(eventQueue);
-        controller = new Controller(model, view);
+        controller = new Controller(model, view, eventQueue);
     }
 
 }
