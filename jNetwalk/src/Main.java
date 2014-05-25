@@ -4,8 +4,6 @@
  * @author Jakub Maleszewski
  */
 
-
-import java.awt.EventQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import model.Model;
 import view.View;

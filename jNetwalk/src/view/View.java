@@ -44,15 +44,6 @@ public class View
     private BlockingQueue<NetwalkEvent> eventQueue; 
         /* Main frame */
     private JFrame frame;
-        /* Menu bar related */
-    private JMenuBar menuBar;
-    private JMenu gameMenu;
-    private JMenuItem newGameMenuItem;
-    private JMenuItem highScoresMenuItem;
-    private JMenuItem quitMenuItem;
-    private JMenu helpMenu;
-    private JMenuItem howToPlayMenuItem;
-    private JMenuItem aboutMenuItem;
         /* Status bar related */
     private JPanel statusBarPanel;
     private JLabel timeLabel;
@@ -93,9 +84,10 @@ public class View
     private void createAndShowGUI()
     {
         createMainWindow();
-        createMainMenu();
+        new MainMenu(this);
         showMaze(7);                //TODO Should be disabled by default
         createStatusBar();          //TODO Status bar should be shown after maze
+        
         frame.setVisible(true);
         frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
     }
@@ -120,6 +112,7 @@ public class View
         frame.setSize(400, 400);
         frame.setLocationByPlatform(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new BorderLayout(0, 0));
         
     }
     
@@ -128,30 +121,7 @@ public class View
      */
     private void createMainMenu()
     {
-        menuBar = new JMenuBar();
-        frame.setJMenuBar(menuBar);
-        
-        gameMenu = new JMenu("Game");
-        menuBar.add(gameMenu);
-        
-        newGameMenuItem = new JMenuItem("New game");
-        gameMenu.add(newGameMenuItem);
-        
-        highScoresMenuItem = new JMenuItem("High scores");
-        gameMenu.add(highScoresMenuItem);
-        
-        quitMenuItem = new JMenuItem("Quit");
-        gameMenu.add(quitMenuItem);
-        
-        helpMenu = new JMenu("Help");
-        menuBar.add(helpMenu);
-        
-        howToPlayMenuItem = new JMenuItem("How to play");
-        helpMenu.add(howToPlayMenuItem);
-        
-        aboutMenuItem = new JMenuItem("About");
-        helpMenu.add(aboutMenuItem);
-        frame.getContentPane().setLayout(new BorderLayout(0, 0));
+
     }
     
     /**
@@ -193,13 +163,14 @@ public class View
         
         mazeButtons = new NetwalkButton[size][size];
         
-        
         for (int yCurrent=0; yCurrent<size; yCurrent++)
             for ( int xCurrent=0; xCurrent<size; xCurrent++)
             {
                 final NetwalkButton newButton = new NetwalkButton("", xCurrent, yCurrent);
                 newButton.setPreferredSize(new Dimension(BUTTON_SIZE_PX, BUTTON_SIZE_PX));
-                try 
+                
+                //TODO Remove this block when it's no longer needed
+                /*try 
                 {
                     Image img = ImageIO.read(getClass().getResource("/resources/bmp/internet.png"));
                     if ((yCurrent + xCurrent +1)%3 == 1)
@@ -209,13 +180,12 @@ public class View
                 catch (IOException ex)
                 {
                     ex.printStackTrace();
-                }
+                }*/
                 
                 final Integer xPosition = xCurrent;
                 final Integer yPosition = yCurrent;
                 newButton.addActionListener(new ActionListener()
                 {                 
-                 
                     public void actionPerformed(ActionEvent event)
                     {
                         eventQueue.offer(new RotateButtonEvent(xPosition, yPosition));
@@ -227,6 +197,12 @@ public class View
             }
         
         frame.pack();
+    }
+    
+    public void setMenuBar (final JMenuBar menuBar)
+    {
+        frame.setJMenuBar(menuBar);
+        
     }
 
     public void showMessage(final String message) //TODO Testing only - for removal!
