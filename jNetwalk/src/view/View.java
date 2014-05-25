@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.BlockingQueue;
 
 
 /**
@@ -36,7 +37,9 @@ public class View
             this.yPosition = yPosition;
         }
     }
-    
+        /* Event queue */
+    private BlockingQueue<Object> eventQueue; 
+        /* Main frame */
     private JFrame frame;
         /* Menu bar related */
     private JMenuBar menuBar;
@@ -56,14 +59,15 @@ public class View
         /* Panel containing maze */
     private JPanel gamePanel;
     private NetwalkButton[][] mazeButtons;
-    
     private static final Integer BUTTON_SIZE_PX = 80;
     
     /**
      * Constructor - calls (in EDT) method responsible for creation of GUI
      */
-    public View()
+    public View(final BlockingQueue<Object> eventQueue)     // TODO Replace Object with Event
     {
+        this.eventQueue = eventQueue;
+        
         try
         {
             EventQueue.invokeAndWait(new Runnable()

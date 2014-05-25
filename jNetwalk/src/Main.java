@@ -6,6 +6,8 @@
 
 
 import java.awt.EventQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import model.Model;
 import view.View;
 import controller.Controller;
@@ -18,6 +20,7 @@ import controller.Controller;
  */
 public class Main
 {
+    private static LinkedBlockingQueue<Object> eventQueue;      //TODO Replace Object with "Event"
     private static Model model;
     private static View view;
     private static Controller controller;
@@ -27,8 +30,9 @@ public class Main
      */
     public static void main(String[] args)
     {    
+        eventQueue = new LinkedBlockingQueue<Object>();
         model = new Model(view);
-        view = new View();
+        view = new View(eventQueue);
         controller = new Controller(model, view);
     }
 
