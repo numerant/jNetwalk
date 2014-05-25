@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import events.NetwalkEvent;
+import events.RotateButtonEvent;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -194,7 +195,7 @@ public class View
         
         
         for (int yCurrent=0; yCurrent<size; yCurrent++)
-            for (int xCurrent=0; xCurrent<size; xCurrent++)
+            for ( int xCurrent=0; xCurrent<size; xCurrent++)
             {
                 final NetwalkButton newButton = new NetwalkButton("", xCurrent, yCurrent);
                 newButton.setPreferredSize(new Dimension(BUTTON_SIZE_PX, BUTTON_SIZE_PX));
@@ -209,11 +210,15 @@ public class View
                 {
                     ex.printStackTrace();
                 }
+                
+                final Integer xPosition = xCurrent;
+                final Integer yPosition = yCurrent;
                 newButton.addActionListener(new ActionListener()
-                {
+                {                 
+                 
                     public void actionPerformed(ActionEvent event)
                     {
-                        JOptionPane.showMessageDialog(null, newButton.xPosition.toString());
+                        eventQueue.offer(new RotateButtonEvent(xPosition, yPosition));
                     }
                 });
                 
@@ -224,4 +229,14 @@ public class View
         frame.pack();
     }
 
+    public void showMessage(final String message) //TODO Testing only - for removal!
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                JOptionPane.showMessageDialog(null, message);
+            }
+        });
+    }
 }

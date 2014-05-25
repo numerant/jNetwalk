@@ -59,6 +59,7 @@ public class Controller
     private void processEvent(NetwalkEvent newEvent)
     {
         //TODO Call model and view here
+        newEvent.process(view, model);
     }
     
 }
