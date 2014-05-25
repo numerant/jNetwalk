@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,13 +28,16 @@ public class MainMenu
     private JMenuItem howToPlayMenuItem;
     private JMenuItem aboutMenuItem;
     
-    MainMenu(View view)
+    MainMenu(final View view)
     {
         this.view = view;
         createMenuItems();
         enableMenu();
     }
     
+    /**
+     * Creates menu items and sets their action listeners
+     */
     void createMenuItems()
     {
         menuBar = new JMenuBar();
@@ -70,10 +72,12 @@ public class MainMenu
         
     }
     
+    /**
+     * Sets the menu as a default for specified view
+     */
     void enableMenu()
     {
         view.setMenuBar(menuBar);
-        
     }
     
 }
