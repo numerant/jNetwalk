@@ -29,18 +29,20 @@ public class Controller
         this.model = model;
         this.view = view;
         this.eventQueue = eventQueue;
+        
+        eventQueueLoop();
     }
     
     /**
      * Event queue loop - waits for a new event in the queue, takes it and starts processing method
      */    
-    public void eventQueueLoop()      //TODO Maybe private method invoked in constructor would be better?
+    private void eventQueueLoop()      //TODO Maybe private method invoked in constructor would be better?
     {
         while(true)
         {
             try
             {
-                NetwalkEvent<?> newEvent = eventQueue.take();
+                NetwalkEvent newEvent = eventQueue.take();
                 processEvent(newEvent);
             }
             catch (InterruptedException e)
@@ -54,7 +56,7 @@ public class Controller
     /**
      * Method responsible for processing event from the queue. Calls model and view, if necessary.
      */
-    private void processEvent(NetwalkEvent<?> newEvent)
+    private void processEvent(NetwalkEvent newEvent)
     {
         //TODO Call model and view here
     }
