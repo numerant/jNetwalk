@@ -21,8 +21,6 @@ public class Main
     private static LinkedBlockingQueue<NetwalkEvent> eventQueue;     
     private static Model model;
     private static View view;
-    private static Controller controller;
-    
     /**
      * Main application method - creates model, view and controller
      */
@@ -31,7 +29,7 @@ public class Main
         eventQueue = new LinkedBlockingQueue<NetwalkEvent>();
         model = new Model(view);
         view = new View(eventQueue);
-        controller = new Controller(model, view, eventQueue);
+        new Controller(model, view, eventQueue);
     }
 
 }
