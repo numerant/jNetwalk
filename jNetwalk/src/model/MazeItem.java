@@ -57,4 +57,9 @@ public abstract class MazeItem
         }
     }
     
+    public void setIsConnected(Boolean isConnected)
+    {
+        this.isConnected = isConnected;
+    }
+    
 }

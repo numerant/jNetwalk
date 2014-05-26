@@ -47,9 +47,13 @@ public class Model
         for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
             for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
             {
-                Wire newItem = new TriWayWire(Direction.RIGHT);
+                Wire newItem = new NinetyDegreeWire(Direction.RIGHT);
                 mazeItems[xCurrent][yCurrent] = newItem;
             }
+        mazeItems[2][4] = new Server(Direction.DOWN);
+        mazeItems[0][2] = new Client(Direction.RIGHT);
+        mazeItems[2][3].setIsConnected(true);
+        mazeItems[0][3] = new Client(Direction.RIGHT);
     }
     
     private Boolean isMazeSolved()
