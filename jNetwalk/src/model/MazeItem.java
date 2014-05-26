@@ -15,7 +15,7 @@ import model.MazeItems.Server;
  * @author Jakub Maleszewski
  * @since 2014-05-25
  */
-public class MazeItem
+public abstract class MazeItem
 {
     public static enum Direction
     {
@@ -26,34 +26,14 @@ public class MazeItem
     protected Integer yPosition;
     protected Direction direction;
     protected Boolean isConnected;
-    protected EnumMap<Direction, String> disconnectedImagePaths;
-    protected static EnumMap<Direction, String> connectedImagePaths;
+    
+    public MazeItem() {}        //TODO: is it needed?
     
     /**
      * Returns an {@link Image} object containing picture of MazeItem's current state
      * @return {@link Image} object
      */
-    public Image getImage()
-    {
-        Image image = null;
-        try
-        {
-            if (this instanceof Server || isConnected)
-            {
-                image = ImageIO.read(getClass().getResource(connectedImagePaths.get(direction)));
-            }
-            else
-            {
-                image = ImageIO.read(getClass().getResource(disconnectedImagePaths.get(direction)));
-            }
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        };
-        
-        return image;
-    }
+    public abstract Image getImage();
     
     /**
      * Rotates an object (counter-clockwise)
@@ -75,11 +55,6 @@ public class MazeItem
                 direction = Direction.LEFT;
                 break;
         }
-    }
-    
-    public void rotate(Direction direction)
-    {
-        this.direction = direction;
     }
     
 }

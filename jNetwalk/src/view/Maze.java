@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import events.GenerateMazeEvent;
+import events.RotateButtonEvent;
 import events.ShowButtonCoordinatesEvent;
 import view.NetwalkButton;
 
@@ -27,7 +28,7 @@ public class Maze
     private Integer mazeSize;
     private JPanel gamePanel;
     private NetwalkButton[][] mazeButtons;
-    private static final Integer BUTTON_SIZE_PX = 80;
+    private static final Integer BUTTON_SIZE_PX = 64;
     
     //TODO Add comment about parameters of constructor
     
@@ -89,7 +90,7 @@ public class Maze
         {                 
             public void actionPerformed(ActionEvent event)
             {
-                view.sendNetwalkEvent(new GenerateMazeEvent(7));
+                view.sendNetwalkEvent(new RotateButtonEvent(xPosition, yPosition));
             }
         });
     }

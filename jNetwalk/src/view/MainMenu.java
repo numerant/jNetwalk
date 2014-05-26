@@ -7,6 +7,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import events.*;
+
 
 /**
  * Class responsible for creating main application menu.
@@ -46,7 +48,15 @@ public class MainMenu
         menuBar.add(gameMenu);
         
         newGameMenuItem = new JMenuItem("New game");
+        newGameMenuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                view.sendNetwalkEvent(new GenerateMazeEvent(7));
+            }
+        });
         gameMenu.add(newGameMenuItem);
+        
         
         highScoresMenuItem = new JMenuItem("High scores");
         gameMenu.add(highScoresMenuItem);

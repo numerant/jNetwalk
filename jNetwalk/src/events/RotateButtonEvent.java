@@ -4,21 +4,24 @@ import model.Model;
 import view.View;
 
 /**
+ * Event handling maze item rotation
  * @author Jakub Maleszewski
- * @since 
- *
+ * @since 2014-05-26
  */
 public class RotateButtonEvent extends NetwalkEvent
 {
-
-    /* (non-Javadoc)
-     * @see events.NetwalkEvent#process(view.View, model.Model)
-     */
-    @Override
-    public void process(View view, Model model)
+    private Integer xPosition;
+    private Integer yPosition;
+    
+    public RotateButtonEvent(Integer xPosition, Integer yPosition)
     {
-        // TODO Auto-generated method stub
-
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+    }
+    
+    public void process(final View view, final Model model)
+    {
+        model.rotateItem(xPosition, yPosition);
     }
 
 }

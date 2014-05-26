@@ -3,11 +3,11 @@ package model.MazeItems;
 import model.MazeItem;
 
 /**
+ * Abstract class for wire-type maze objects
  * @author Jakub Maleszewski
- * @since 
- *
+ * @since 2014-05-26
  */
-public class Wire extends MazeItem
+public abstract class Wire extends MazeItem
 {
 
 }

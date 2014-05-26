@@ -48,8 +48,7 @@ public class Model
         for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
             for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
             {
-                Server newItem = new Server();
-                newItem.rotate(Direction.UP);
+                Wire newItem = new TriWayWire(Direction.RIGHT);
                 mazeItems[xCurrent][yCurrent] = newItem;
             }
     }
