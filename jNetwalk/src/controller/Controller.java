@@ -36,7 +36,7 @@ public class Controller
     /**
      * Event queue loop - waits for a new event in the queue, takes it and starts processing method
      */    
-    private void eventQueueLoop()      //TODO Maybe private method invoked in constructor would be better?
+    private void eventQueueLoop()
     {
         while(true)
         {

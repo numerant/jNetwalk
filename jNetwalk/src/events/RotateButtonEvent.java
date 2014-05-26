@@ -1,28 +1,24 @@
 package events;
 
-import view.View;
 import model.Model;
+import view.View;
 
 /**
- * Class representing event of button rotation
- * 
  * @author Jakub Maleszewski
- * @since 2014-05-25
+ * @since 
+ *
  */
-
-public final class RotateButtonEvent extends NetwalkEvent
+public class RotateButtonEvent extends NetwalkEvent
 {
-    private Integer xPosition;
-    private Integer yPosition;
-    
-    public RotateButtonEvent(Integer xPosition, Integer yPosition)
+
+    /* (non-Javadoc)
+     * @see events.NetwalkEvent#process(view.View, model.Model)
+     */
+    @Override
+    public void process(View view, Model model)
     {
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+        // TODO Auto-generated method stub
+
     }
-    
-    public void process(final View view, final Model model)
-    {
-        view.showMessage(xPosition.toString() + " " + yPosition.toString());
-    }
+
 }

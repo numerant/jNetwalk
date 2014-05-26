@@ -3,11 +3,13 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 
-import events.RotateButtonEvent;
+import events.ShowButtonCoordinatesEvent;
 import view.NetwalkButton;
 
 /**
@@ -25,6 +27,7 @@ public class Maze
     private NetwalkButton[][] mazeButtons;
     private static final Integer BUTTON_SIZE_PX = 80;
     
+    //TODO Add comment about parameters of constructor
     
     public Maze(final View view, final Integer size)
     {
@@ -59,8 +62,13 @@ public class Maze
             }
     }
 
+    public void updateMazePanelFromMock(final Image[][] mock)
+    {
+        
+    }
+    
     /**
-     * Adds {@link RotateButtonEvent} {@link ActionListener} to the specified button
+     * Adds {@link ShowButtonCoordinatesEvent} {@link ActionListener} to the specified button
      * @param button - NetwalkButton object, which we add a listener to
      * @param xPosition - horizontal position of the button in the maze
      * @param yPosition - vertical position of the button in the maze
@@ -71,7 +79,7 @@ public class Maze
         {                 
             public void actionPerformed(ActionEvent event)
             {
-                view.sendNetwalkEvent(new RotateButtonEvent(xPosition, yPosition));
+                view.sendNetwalkEvent(new ShowButtonCoordinatesEvent(xPosition, yPosition));
             }
         });
     }

@@ -17,6 +17,7 @@ public class View
 {
     private BlockingQueue<NetwalkEvent> eventQueue; 
     private JFrame frame;
+    private Maze maze;
 
     /**
      * Constructor - sets event queue for communication with controller and calls (in EDT) method responsible for creation of GUI
@@ -48,7 +49,7 @@ public class View
     {
         createMainWindow();
         new MainMenu(this);
-        new Maze(this, 7);          //TODO Should be disabled by default
+        maze = new Maze(this, 7);          //TODO Should be disabled by default
         new StatusBar(this);        //TODO Status bar should be shown after maze creation
         
         frame.setLocationByPlatform(true);
@@ -108,6 +109,16 @@ public class View
         frame.pack();
     }
 
+    public void setMock (final Image[][] mock)
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                maze.updateMazePanelFromMock(mock);
+            }
+        });
+    }
     
     public void showMessage(final String message) //TODO Testing only - for removal!
     {
