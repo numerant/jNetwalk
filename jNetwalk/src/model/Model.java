@@ -100,4 +100,10 @@ public class Model
         }
         
     }
+    
+    private void mazeGenerationAlgorithm()
+    {
+        
+    }
+    
 }
