@@ -35,10 +35,9 @@ public class Model
      */
     public void generateMaze(Integer size)
     {
-        //TODO Implement maze algorithm
         this.mazeSize = size;
         mazeItems = new MazeItem[size][size];
-        fakeMazeGenerator();
+        fakeMazeGenerator();            //TODO Implement maze algorithm instead of "fake generator"
         sendMock();
     }
     
@@ -55,7 +54,7 @@ public class Model
     
     private Boolean isMazeSolved()
     {
-        
+
         //TODO Implement checkConnections
         return false;
     }

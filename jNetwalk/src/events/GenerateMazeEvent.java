@@ -17,8 +17,13 @@ public class GenerateMazeEvent extends NetwalkEvent
         this.size = size;
     }
     
+    /**
+     * Notifies view that the maze panel should be created now
+     * Tells
+     */
     public void process(final View view, final Model model)
     {
+        view.createMazePanel(size);
         model.generateMaze(size);
     }
 

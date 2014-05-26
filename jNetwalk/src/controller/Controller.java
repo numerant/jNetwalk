@@ -58,7 +58,7 @@ public class Controller
      */
     private void processEvent(NetwalkEvent newEvent)
     {
-        //TODO Call model and view here
+        //TODO Is such way of event handling a good idea?
         newEvent.process(view, model);
     }
     

@@ -53,9 +53,9 @@ public class View
     {
         createMainWindow();
         new MainMenu(this);
-        maze = new Maze(this, 7);          //TODO Should be disabled by default
         new StatusBar(this);        //TODO Status bar should be shown after maze creation
         
+        frame.setSize(400, 400);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
@@ -68,7 +68,6 @@ public class View
     {
         try 
         {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");     //TODO Make it multiplatform
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } 
         catch (Exception e) 
@@ -78,7 +77,6 @@ public class View
         
             /* Some frame properties - default size and positioning */
         frame = new JFrame();
-        frame.setSize(400, 400);
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -113,6 +111,24 @@ public class View
         frame.pack();
     }
 
+    
+    public void createMazePanel(final Integer size)
+    {
+        final View view = this;
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                maze = new Maze(view, size);
+            }
+        });
+    }
+    
+    /**
+     * Updates on-screen maze using a new mock
+     * Makes maze panel visible after update (useful when staring a new game)
+     * @param mock - mock to update panel with
+     */
     public void setMock (final Image[][] mock)
     {
         EventQueue.invokeLater(new Runnable()
@@ -120,6 +136,7 @@ public class View
             public void run() 
             {
                 maze.updateMazePanelFromMock(mock);
+                maze.showMaze();
             }
         });
     }

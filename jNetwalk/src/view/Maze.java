@@ -30,15 +30,17 @@ public class Maze
     private NetwalkButton[][] mazeButtons;
     private static final Integer BUTTON_SIZE_PX = 64;
     
-    //TODO Add comment about parameters of constructor
-    
+    /**
+     * @param view - specifies view used to send events
+     * @param size - size of the square maze
+     */
     public Maze(final View view, final Integer size)
     {
         this.view = view;
         this.mazeSize = size;
         
         createMazePanel();
-        showMaze();
+        
     }
     
     /** 
@@ -98,20 +100,10 @@ public class Maze
     /**
      * Adds maze panel to the main window
      */
-    private void showMaze()
+    public void showMaze()
     {
         view.addPanel(gamePanel, BorderLayout.CENTER);
     }
 }
 
-
-
-//TODO Remove this block when it's no longer needed
-/*try 
-{
-    Image img = ImageIO.read(getClass().getResource("/resources/bmp/internet.png"));
-    if ((yCurrent + xCurrent +1)%3 == 1)
-        img = ImageIO.read(getClass().getResource("/resources/bmp/link1.png"));
-    newButton.setIcon(new ImageIcon(img));
-}*/
 
