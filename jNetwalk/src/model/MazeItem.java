@@ -27,7 +27,7 @@ public class MazeItem
     protected Direction direction;
     protected Boolean isConnected;
     protected EnumMap<Direction, String> disconnectedImagePaths;
-    protected EnumMap<Direction, String> connectedImagePaths;
+    protected static EnumMap<Direction, String> connectedImagePaths;
     
     /**
      * Returns an {@link Image} object containing picture of MazeItem's current state
@@ -75,6 +75,11 @@ public class MazeItem
                 direction = Direction.LEFT;
                 break;
         }
+    }
+    
+    public void rotate(Direction direction)
+    {
+        this.direction = direction;
     }
     
 }

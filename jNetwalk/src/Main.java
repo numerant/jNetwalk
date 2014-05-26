@@ -5,9 +5,11 @@
  */
 
 import java.util.concurrent.LinkedBlockingQueue;
+
 import model.Model;
 import view.View;
 import controller.Controller;
+import events.GenerateMazeEvent;
 import events.NetwalkEvent;
 
 /**
@@ -27,9 +29,10 @@ public class Main
     public static void main(String[] args)
     {    
         eventQueue = new LinkedBlockingQueue<NetwalkEvent>();
-        model = new Model(view);
         view = new View(eventQueue);
+        model = new Model(view);
         new Controller(model, view, eventQueue);
+
     }
 
 }

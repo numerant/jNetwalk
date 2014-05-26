@@ -7,8 +7,10 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import events.GenerateMazeEvent;
 import events.ShowButtonCoordinatesEvent;
 import view.NetwalkButton;
 
@@ -62,9 +64,17 @@ public class Maze
             }
     }
 
+    /**
+     * Updates images on maze buttons using a mock
+     * @param mock
+     */
     public void updateMazePanelFromMock(final Image[][] mock)
     {
-        
+        for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
+            for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
+            {
+                mazeButtons[xCurrent][yCurrent].setIcon(new ImageIcon( mock[xCurrent][yCurrent] ));
+            }
     }
     
     /**
@@ -79,7 +89,7 @@ public class Maze
         {                 
             public void actionPerformed(ActionEvent event)
             {
-                view.sendNetwalkEvent(new ShowButtonCoordinatesEvent(xPosition, yPosition));
+                view.sendNetwalkEvent(new GenerateMazeEvent(7));
             }
         });
     }

@@ -3,6 +3,8 @@ package model;
 import java.awt.Image;
 
 import view.View;
+import model.MazeItem.Direction;
+import model.MazeItems.*;
 
 
 /**
@@ -36,6 +38,20 @@ public class Model
         //TODO Implement maze algorithm
         this.mazeSize = size;
         mazeItems = new MazeItem[size][size];
+        fakeMazeGenerator();
+        sendMock();
+    }
+    
+        /** FOR REMOVAL - JUST FOR THE TESTING PURPOSES */
+    private void fakeMazeGenerator()
+    {
+        for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
+            for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
+            {
+                Server newItem = new Server();
+                newItem.rotate(Direction.UP);
+                mazeItems[xCurrent][yCurrent] = newItem;
+            }
     }
     
     private Boolean isMazeSolved()
