@@ -15,7 +15,7 @@ import model.MazeItems.Server;
  * @author Jakub Maleszewski
  * @since 2014-05-25
  */
-public abstract class MazeItem
+public abstract class MazeMockItem
 {
     public static enum Direction
     {
@@ -27,7 +27,7 @@ public abstract class MazeItem
     protected Direction direction;
     protected Boolean isConnected;
     
-    public MazeItem() {}        //TODO: is it needed?
+    public MazeMockItem() {}        //TODO: is it needed?
     
     /**
      * Returns an {@link Image} object containing picture of MazeItem's current state

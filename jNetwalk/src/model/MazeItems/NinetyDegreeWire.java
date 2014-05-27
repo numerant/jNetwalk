@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.EnumMap;
 import javax.imageio.ImageIO;
 
-import model.MazeItem;
+import model.MazeMockItem;
 
 /**
  * Represents 90-degree (L) wire on the maze
@@ -27,15 +27,15 @@ public class NinetyDegreeWire extends Wire
         disconnectedImages = new EnumMap<Direction, Image>(Direction.class);
         try
         {
-            connectedImages.put(Direction.UP, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_up_connected.png")));
-            connectedImages.put(Direction.DOWN, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_down_connected.png")));
-            connectedImages.put(Direction.LEFT, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_left_connected.png")));
-            connectedImages.put(Direction.RIGHT, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_right_connected.png")));
+            connectedImages.put(Direction.UP, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_up_connected.png")));
+            connectedImages.put(Direction.DOWN, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_down_connected.png")));
+            connectedImages.put(Direction.LEFT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_left_connected.png")));
+            connectedImages.put(Direction.RIGHT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_right_connected.png")));
             
-            disconnectedImages.put(Direction.UP, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_up_disconnected.png")));
-            disconnectedImages.put(Direction.DOWN, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_down_disconnected.png")));
-            disconnectedImages.put(Direction.LEFT, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_left_disconnected.png")));
-            disconnectedImages.put(Direction.RIGHT, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/link_90deg_right_disconnected.png")));
+            disconnectedImages.put(Direction.UP, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_up_disconnected.png")));
+            disconnectedImages.put(Direction.DOWN, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_down_disconnected.png")));
+            disconnectedImages.put(Direction.LEFT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_left_disconnected.png")));
+            disconnectedImages.put(Direction.RIGHT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/link_90deg_right_disconnected.png")));
         }
         catch (IOException e)
         {

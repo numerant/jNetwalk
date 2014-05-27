@@ -3,7 +3,7 @@ package model;
 import java.awt.Image;
 
 import view.View;
-import model.MazeItem.Direction;
+import model.MazeMockItem.Direction;
 import model.MazeItems.*;
 
 
@@ -19,7 +19,8 @@ public class Model
 {
     private View view;
     private Integer mazeSize;
-    private MazeItem[][] mazeItems;
+    private MazeMockItem[][] mazeItems;
+ 
     
     /**
      * Constructor - sets reference to view
@@ -36,7 +37,7 @@ public class Model
     public void generateMaze(Integer size)
     {
         this.mazeSize = size;
-        mazeItems = new MazeItem[size][size];
+        mazeItems = new MazeMockItem[size][size];
         fakeMazeGenerator();            //TODO Implement maze algorithm instead of "fake generator"
         sendMock();
     }
@@ -80,11 +81,11 @@ public class Model
     }
     
     /**
-     * Rotates {@link MazeItem} object of specified coordinates.
+     * Rotates {@link MazeMockItem} object of specified coordinates.
      * Invokes function checking how the maze has changed.
      * Notifies view of changes.
-     * @param xPosition - horizontal position of {@link MazeItem} in a grid
-     * @param yPosition - vertical position of {@link MazeItem} in a grid
+     * @param xPosition - horizontal position of {@link MazeMockItem} in a grid
+     * @param yPosition - vertical position of {@link MazeMockItem} in a grid
      */
     public void rotateItem(final Integer xPosition, final Integer yPosition)
     {
@@ -98,11 +99,6 @@ public class Model
         {
             sendMock();
         }
-        
-    }
-    
-    private void mazeGenerationAlgorithm()
-    {
         
     }
     

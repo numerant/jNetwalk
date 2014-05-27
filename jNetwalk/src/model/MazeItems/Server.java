@@ -6,7 +6,7 @@ import java.util.EnumMap;
 
 import javax.imageio.ImageIO;
 
-import model.MazeItem;
+import model.MazeMockItem;
 
 /**
  * Represents server item on the maze
@@ -15,7 +15,7 @@ import model.MazeItem;
  * @author Jakub Maleszewski
  * @since 2014-05-25
  */
-public class Server extends MazeItem
+public class Server extends MazeMockItem
 {
     private static EnumMap<Direction, Image> connectedImages;
     
@@ -27,10 +27,10 @@ public class Server extends MazeItem
         connectedImages = new EnumMap<Direction, Image>(Direction.class);
         try
         {
-            connectedImages.put(Direction.UP, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/server_up.png")));
-            connectedImages.put(Direction.DOWN, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/server_down.png")));
-            connectedImages.put(Direction.LEFT, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/server_left.png")));
-            connectedImages.put(Direction.RIGHT, ImageIO.read(MazeItem.class.getClassLoader().getResource("resources/img/server_right.png")));
+            connectedImages.put(Direction.UP, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/server_up.png")));
+            connectedImages.put(Direction.DOWN, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/server_down.png")));
+            connectedImages.put(Direction.LEFT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/server_left.png")));
+            connectedImages.put(Direction.RIGHT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/server_right.png")));
         }
         catch (IOException e)
         {
