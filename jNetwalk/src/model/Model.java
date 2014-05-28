@@ -48,7 +48,7 @@ public class Model
         for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
             for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
             {
-                Wire newItem = new NinetyDegreeWire(Direction.RIGHT);
+                Wire newItem = new TriWayWire(Direction.RIGHT);
                 mazeItems[xCurrent][yCurrent] = newItem;
             }
         mazeItems[2][4] = new Server(Direction.DOWN);

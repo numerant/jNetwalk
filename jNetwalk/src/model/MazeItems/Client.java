@@ -26,7 +26,7 @@ public class Client extends MazeMockItem
         connectedImages = new EnumMap<Direction, Image>(Direction.class);
         disconnectedImages = new EnumMap<Direction, Image>(Direction.class);
         try
-        {
+        {       //TODO przenieść do widoku
             connectedImages.put(Direction.UP, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/client_up_connected.png")));
             connectedImages.put(Direction.DOWN, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/client_down_connected.png")));
             connectedImages.put(Direction.LEFT, ImageIO.read(MazeMockItem.class.getClassLoader().getResource("resources/img/client_left_connected.png")));
