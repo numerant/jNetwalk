@@ -42,9 +42,14 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.isTaken = true;
     }
     
-    public Boolean getIsClient()
+    public Boolean isClient()
     {
         return isClient;
+    }
+    
+    public Boolean isServer()
+    {
+        return isServer;
     }
     
     public void setIsClient(Boolean isClient)
@@ -74,7 +79,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.takenNeighborCount = takenNeighborCount;
     }
     
-    public Boolean getUpNeighborConnected()
+    public Boolean isUpNeighborConnected()
     {
         return upNeighborConnected;
     }
@@ -84,7 +89,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.upNeighborConnected = upNeighborConnected;
     }
     
-    public Boolean getLeftNeighborConnected()
+    public Boolean isLeftNeighborConnected()
     {
         return leftNeighborConnected;
     }
@@ -94,7 +99,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.leftNeighborConnected = leftNeighborConnected;
     }
     
-    public Boolean getRightNeighborConnected()
+    public Boolean isRightNeighborConnected()
     {
         return rightNeighborConnected;
     }
@@ -114,7 +119,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.connectedNeighborCount++;
     }
 
-    public Boolean getDownNeighborConnected()
+    public Boolean isDownNeighborConnected()
     {
         return downNeighborConnected;
     }
@@ -144,7 +149,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.yPosition = yPosition;
     }
 
-    public Boolean getUpNeighborTaken()
+    public Boolean isUpNeighborTaken()
     {
         return upNeighborTaken;
     }
@@ -154,7 +159,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.upNeighborTaken = upNeighborTaken;
     }
 
-    public Boolean getDownNeighborTaken()
+    public Boolean isDownNeighborTaken()
     {
         return downNeighborTaken;
     }
@@ -164,7 +169,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.downNeighborTaken = downNeighborTaken;
     }
 
-    public Boolean getLeftNeighborTaken()
+    public Boolean isLeftNeighborTaken()
     {
         return leftNeighborTaken;
     }
@@ -174,7 +179,7 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.leftNeighborTaken = leftNeighborTaken;
     }
 
-    public Boolean getRightNeighborTaken()
+    public Boolean isRightNeighborTaken()
     {
         return rightNeighborTaken;
     }
@@ -182,6 +187,22 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
     public void setRightNeighborTaken(Boolean rightNeighborTaken)
     {
         this.rightNeighborTaken = rightNeighborTaken;
+    }
+    
+    public Boolean isTriWayWire()
+    {
+        if (connectedNeighborCount.equals(3))
+            return true;
+        else return false;
+    }
+    
+    public Boolean isNinetyDegreeWire()
+    {
+        Boolean areBothUpAndDownConnected = upNeighborConnected && downNeighborConnected;
+        Boolean areBothLeftAndRightConnected = leftNeighborConnected && rightNeighborConnected;
+        if (connectedNeighborCount.equals(2) && !areBothLeftAndRightConnected && !areBothUpAndDownConnected)
+            return true;
+        else return false;
     }
     
 }

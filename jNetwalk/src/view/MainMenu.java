@@ -52,7 +52,7 @@ public class MainMenu
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                view.sendNetwalkEvent(new GenerateMazeEvent(5));
+                view.sendNetwalkEvent(new GenerateMazeEvent(8));
             }
         });
         gameMenu.add(newGameMenuItem);

@@ -31,7 +31,6 @@ public class Controller
         this.view = view;
         this.eventQueue = eventQueue;
         
-        MazeGenerator generator = new MazeGenerator(5);
         
         eventQueueLoop();
     }

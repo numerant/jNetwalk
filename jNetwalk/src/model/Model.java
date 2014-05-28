@@ -20,6 +20,7 @@ public class Model
     private View view;
     private Integer mazeSize;
     private MazeMockItem[][] mazeItems;
+    private MazeModelItem[][] mazeModel;
  
     
     /**
@@ -36,14 +37,17 @@ public class Model
      */
     public void generateMaze(Integer size)
     {
+        MazeGenerator generator = new MazeGenerator(size);
+        mazeModel = generator.generateMazeModel();
         this.mazeSize = size;
         mazeItems = new MazeMockItem[size][size];
-        fakeMazeGenerator();            //TODO Implement maze algorithm instead of "fake generator"
+        //fakeMockGenerator();            //TODO Implement maze algorithm instead of "fake generator"
+        realMockGenerator();
         sendMock();
     }
     
         /** FOR REMOVAL - JUST FOR THE TESTING PURPOSES */
-    private void fakeMazeGenerator()
+    private void fakeMockGenerator()
     {
         for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
             for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
@@ -55,6 +59,56 @@ public class Model
         mazeItems[0][2] = new Client(Direction.RIGHT);
         mazeItems[2][3].setIsConnected(true);
         mazeItems[0][3] = new Client(Direction.RIGHT);
+    }
+    
+    private void realMockGenerator()
+    {
+        
+        for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
+            for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
+            {
+                MazeModelItem modelItem = mazeModel[xCurrent][yCurrent];
+                MazeMockItem mockItem = null;
+                
+                if (modelItem.isClient())
+                    mockItem = new Client(getDirectionFromMazeModelItem(modelItem));
+                else if (modelItem.isServer())
+                    mockItem = new Server(getDirectionFromMazeModelItem(modelItem));
+                else if (modelItem.isTriWayWire())
+                    mockItem = new TriWayWire(getDirectionFromMazeModelItem(modelItem));
+                else if (modelItem.isNinetyDegreeWire())
+                    mockItem = new NinetyDegreeWire(Direction.UP);
+                else 
+                    mockItem = new StraightWire(Direction.UP);
+                
+                mazeItems[xCurrent][yCurrent] = mockItem;
+            }
+    }
+    
+    /**
+     * Takes direction from {@link MazeModelItem} object and converts it to {@link Direction} enumerator
+     * @param modelItem - object to convert
+     * @return {@link Direction} object
+     */
+    private Direction getDirectionFromMazeModelItem(final MazeModelItem modelItem)
+    {
+        Direction direction = null;
+        
+        if (modelItem.isClient() || modelItem.isServer())
+        {
+            if (modelItem.isDownNeighborConnected())
+                direction = Direction.DOWN;
+            else if (modelItem.isUpNeighborConnected())
+                direction = Direction.UP;
+            else if (modelItem.isLeftNeighborConnected())
+                direction = Direction.LEFT;
+            else if (modelItem.isRightNeighborConnected())
+                direction = Direction.RIGHT;
+        }
+        else direction = Direction.UP;
+        
+        
+        return direction;
     }
     
     private Boolean isMazeSolved()

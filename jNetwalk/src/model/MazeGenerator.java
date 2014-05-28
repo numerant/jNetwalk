@@ -16,8 +16,8 @@ public class MazeGenerator      //TODO: maybe make it static?
     public MazeGenerator(Integer size)
     {
         this.mazeSize = size;
-        mazeGenerationAlgorithm();
-        printTable();
+        generateMazeModel();
+        
     }
     
     /**
@@ -36,8 +36,7 @@ public class MazeGenerator      //TODO: maybe make it static?
      * The main maze generation method.
      * Uses simplified Prim's algorithm for finding the spanning tree
      */
-    @SuppressWarnings("unused")
-    private void mazeGenerationAlgorithm()      //TODO Maze generation algorithm will be just here!
+    public MazeModelItem[][] generateMazeModel()      //TODO Maze generation algorithm will be just here!
     {
         nodesToCheck = new Vector<MazeModelItem>();
         Integer serverXCoordinate = (int)(Math.random() * mazeSize);    //TODO check if generated numbers are from the right range
@@ -88,7 +87,8 @@ public class MazeGenerator      //TODO: maybe make it static?
             addNodeToCheck(randomNeighbor);
             
         }
-        
+        printTable();
+        return mazeModel;
     }
     
     /**
@@ -148,22 +148,22 @@ public class MazeGenerator      //TODO: maybe make it static?
         Integer iterator = 0;
         
             /* Adds every free neighbor to the freeNeighbors array */
-        if (item.getUpNeighborTaken().equals(false))
+        if (item.isUpNeighborTaken().equals(false))
         {
             freeNeighbors[iterator] = mazeModel[ item.getXPosition() ][ item.getYPosition() - 1 ];
             iterator++;
         }
-        if (item.getDownNeighborTaken().equals(false))
+        if (item.isDownNeighborTaken().equals(false))
         {
             freeNeighbors[iterator] = mazeModel[ item.getXPosition() ][ item.getYPosition() + 1 ];
             iterator++;
         }
-        if (item.getLeftNeighborTaken().equals(false))
+        if (item.isLeftNeighborTaken().equals(false))
         {
             freeNeighbors[iterator] = mazeModel[ item.getXPosition() - 1 ][ item.getYPosition() ];
             iterator++;
         }
-        if (item.getRightNeighborTaken().equals(false))
+        if (item.isRightNeighborTaken().equals(false))
         {
             freeNeighbors[iterator] = mazeModel[ item.getXPosition() + 1 ][ item.getYPosition() ];
             iterator++;
@@ -248,14 +248,16 @@ public class MazeGenerator      //TODO: maybe make it static?
             {
                 MazeModelItem currentItem = mazeModel[xCurrent][yCurrent];
                 
-                if (currentItem.getIsClient())
+                if (currentItem.isClient())
                     System.out.print("C ");
                 else if (currentItem.getIsServer())
                     System.out.print("S ");
-                else if (currentItem.getConnectedNeighborCount().equals(3))
+                else if (currentItem.isTriWayWire())
                     System.out.print("3 ");
-                else if (currentItem.getConnectedNeighborCount().equals(2))
-                    System.out.print("2 ");
+                else if (currentItem.isNinetyDegreeWire())
+                    System.out.print("< ");
+                else
+                    System.out.print("| ");
             }
             System.out.println("");
         }
