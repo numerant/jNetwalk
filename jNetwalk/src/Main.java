@@ -9,14 +9,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 import model.Model;
 import view.View;
 import controller.Controller;
-import events.GenerateMazeEvent;
 import events.NetwalkEvent;
 
 /**
+ * Main application class.
+ * Takes care of creating model, view and controller objects.
+ * Creates event queue and connects it to other objects
  * @author Jakub Maleszewski
  * @since 2014-05-18
- * 
- *
  */
 public class Main
 {
