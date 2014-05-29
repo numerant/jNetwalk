@@ -16,17 +16,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
-import events.RotateButtonEvent;
-
 public class HelpWindow extends JDialog
 {
 
+    private static final long serialVersionUID = 3385535343800639831L;  // to avoid compiler warnings
     private final JPanel contentPanel = new JPanel();
 
     
     public HelpWindow(final JFrame mainWindow)
     {
-        super(mainWindow, "How to play", ModalityType.MODELESS);
+        super(mainWindow, "How to play", ModalityType.APPLICATION_MODAL);
         createDialog();
         showDialog();
     }
