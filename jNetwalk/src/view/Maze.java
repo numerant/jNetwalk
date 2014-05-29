@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import events.RotateButtonEvent;
-import events.ShowButtonCoordinatesEvent;
 import view.NetwalkButton;
 
 /**

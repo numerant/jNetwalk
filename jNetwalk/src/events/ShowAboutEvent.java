@@ -17,8 +17,9 @@ public class ShowAboutEvent extends NetwalkEvent
     public void process(View view, Model model)
     {
         String message = "<html>jNetwalk<br>by Jakub Maleszewski</html>";
+        String title = "About";
 
-        view.showMessage(message);
+        view.showMessage(message, title);
     }
 
 }

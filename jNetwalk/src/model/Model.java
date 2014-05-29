@@ -19,7 +19,7 @@ public class Model
 {
     private View view;
     private Integer mazeSize;
-    private Integer moveCount;
+    private Integer moveCount = 0;
     private MazeMockItem[][] mazeItems;
     private MazeModelItem[][] mazeModel;
  
@@ -41,8 +41,6 @@ public class Model
         MazeGenerator generator = new MazeGenerator(size);
         mazeModel = generator.generateMazeModel();
         this.mazeSize = size;
-        this.moveCount = 0;
-        view.setMoveCount(moveCount);
         mazeItems = new MazeMockItem[size][size];
         //fakeMockGenerator();            //TODO Implement maze algorithm instead of "fake generator"
         realMockGenerator();

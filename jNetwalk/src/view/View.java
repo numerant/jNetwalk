@@ -175,13 +175,13 @@ public class View
      * Shows specified message as a message box on the screen.
      * @param message - message to show
      */
-    public void showMessage(final String message)
+    public void showMessage(final String message, final String title)
     {
         EventQueue.invokeLater(new Runnable()
         {
             public void run() 
             {
-                JOptionPane.showMessageDialog(frame, message);
+                JOptionPane.showMessageDialog(frame, message, title, JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
