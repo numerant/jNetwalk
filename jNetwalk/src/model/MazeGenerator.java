@@ -106,25 +106,25 @@ public class MazeGenerator      //TODO: maybe make it static?
         Integer takenNeighborCount = 0;
         
             /* When item is in the top row or its higher neighbor is taken */
-        if (yPosition.equals(0) || mazeModel[xPosition][yPosition - 1].getIsTaken())
+        if (yPosition.equals(0) || mazeModel[xPosition][yPosition - 1].isTaken())
         {
             item.setUpNeighborTaken(true);
             takenNeighborCount++;
         }
             /* When item is in the bottom row or its lower neighbor is taken */
-        if (yPosition.equals(mazeSize - 1) || mazeModel[xPosition][yPosition + 1].getIsTaken())
+        if (yPosition.equals(mazeSize - 1) || mazeModel[xPosition][yPosition + 1].isTaken())
         {
             item.setDownNeighborTaken(true);
             takenNeighborCount++;
         }
             /* When item is in the first row from the left or its left neighbor is taken */
-        if (xPosition.equals(0) || mazeModel[xPosition - 1][yPosition].getIsTaken())
+        if (xPosition.equals(0) || mazeModel[xPosition - 1][yPosition].isTaken())
         {
             item.setLeftNeighborTaken(true);
             takenNeighborCount++;
         }
             /* When item is in the first row from the right or its right neighbor is taken */
-        if (xPosition.equals(mazeSize - 1) || mazeModel[xPosition + 1][yPosition].getIsTaken())
+        if (xPosition.equals(mazeSize - 1) || mazeModel[xPosition + 1][yPosition].isTaken())
         {
             item.setRightNeighborTaken(true);
             takenNeighborCount++;
@@ -250,7 +250,7 @@ public class MazeGenerator      //TODO: maybe make it static?
                 
                 if (currentItem.isClient())
                     System.out.print("C ");
-                else if (currentItem.getIsServer())
+                else if (currentItem.isServer())
                     System.out.print("S ");
                 else if (currentItem.isTriWayWire())
                     System.out.print("3 ");

@@ -24,34 +24,48 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
     private Integer xPosition;
     private Integer yPosition;
     
+    /**
+     * Creates new MazeModelItem on specified position
+     */
     public MazeModelItem(Integer xPosition, Integer yPosition)
     {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
     }
     
-    public Boolean getIsServer()
+    /**
+     * Getter for isServer property
+     * @return {@link Boolean} value - true if item represents a server
+     */
+    public Boolean isServer()
     {
         return isServer;
     }
     
-    public void setIsServer(Boolean isServer)
+    /**
+     * Setter for isServer property
+     * @param isServer - {@link Boolean} parameter to set
+     */
+    public void setIsServer(Boolean isServer)   //TODO: parameter is not necessary, setting it always as true is enough
     {
         this.isServer = isServer;
             /* If it's a server, its field must be taken */
         this.isTaken = true;
     }
     
+    /**
+     * Getter for isClient property
+     * @return {@link Boolean} value - true if item represents a client
+     */
     public Boolean isClient()
     {
         return isClient;
     }
-    
-    public Boolean isServer()
-    {
-        return isServer;
-    }
-    
+
+    /**
+     * Setter for isClient property
+     * @param isClient - {@link Boolean} parameter to set
+     */
     public void setIsClient(Boolean isClient)
     {
         this.isClient = isClient;
@@ -59,16 +73,28 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         this.isTaken = true;
     }
     
-    public Boolean getIsTaken()
+    /**
+     * Getter for isTaken propety
+     * @return {@link Boolean} value - true if the field is already taken
+     */
+    public Boolean isTaken()
     {
         return isTaken;
     }
     
+    /**
+     * Setter for isTaken property
+     * @param isTaken - {@link Boolean} parameter to set
+     */
     public void setIsTaken(Boolean isTaken)
     {
         this.isTaken = isTaken;
     }
     
+    /**
+     * Returns number of neighbors that are not taken yet
+     * @return {@link Integer} value - free neighbor count
+     */
     public Integer getFreeNeighborCount()
     {
         return (4 -takenNeighborCount);

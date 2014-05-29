@@ -23,12 +23,22 @@ public class MainMenu
         /* Menu bar and items */
     private JMenuBar menuBar;
     private JMenu gameMenu;
-    private JMenuItem newGameMenuItem;
+    private JMenu newGameMenu;
+    private JMenuItem difficulyEasyItem;
+    private JMenuItem difficulyMediumItem;
+    private JMenuItem difficulyHardItem;
+    private JMenuItem difficulyVeryHardItem;
     private JMenuItem highScoresMenuItem;
     private JMenuItem quitMenuItem;
     private JMenu helpMenu;
     private JMenuItem howToPlayMenuItem;
     private JMenuItem aboutMenuItem;
+    
+        /* How difficult are difficulty levels */
+    private final Integer DIFFICULTY_EASY_SIZE = 5;
+    private final Integer DIFFICULTY_MEDIUM_SIZE = 7;
+    private final Integer DIFFICULTY_HARD_SIZE = 8;
+    private final Integer DIFFICULTY_VERY_HARD_SIZE = 10;
     
     MainMenu(final View view)
     {
@@ -47,15 +57,48 @@ public class MainMenu
         gameMenu = new JMenu("Game");
         menuBar.add(gameMenu);
         
-        newGameMenuItem = new JMenuItem("New game");
-        newGameMenuItem.addActionListener(new ActionListener()
+        newGameMenu = new JMenu("New game");
+        gameMenu.add(newGameMenu);
+        
+        difficulyEasyItem = new JMenuItem("Easy");
+        difficulyEasyItem.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                view.sendNetwalkEvent(new GenerateMazeEvent(8));
+                view.sendNetwalkEvent(new GenerateMazeEvent(DIFFICULTY_EASY_SIZE));
             }
         });
-        gameMenu.add(newGameMenuItem);
+        newGameMenu.add(difficulyEasyItem);
+        
+        difficulyMediumItem = new JMenuItem("Medium");
+        difficulyMediumItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                view.sendNetwalkEvent(new GenerateMazeEvent(DIFFICULTY_MEDIUM_SIZE));
+            }
+        });
+        newGameMenu.add(difficulyMediumItem);
+        
+        difficulyHardItem = new JMenuItem("Hard");
+        difficulyHardItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                view.sendNetwalkEvent(new GenerateMazeEvent(DIFFICULTY_HARD_SIZE));
+            }
+        });
+        newGameMenu.add(difficulyHardItem);
+        
+        difficulyVeryHardItem = new JMenuItem("Very Hard");
+        difficulyVeryHardItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                view.sendNetwalkEvent(new GenerateMazeEvent(DIFFICULTY_VERY_HARD_SIZE));
+            }
+        });
+        newGameMenu.add(difficulyVeryHardItem);
         
         
         highScoresMenuItem = new JMenuItem("High scores");

@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Image;
+import java.util.Random;
 
 import view.View;
 import model.MazeMockItem.Direction;
@@ -71,15 +72,15 @@ public class Model
                 MazeMockItem mockItem = null;
                 
                 if (modelItem.isClient())
-                    mockItem = new Client(getDirectionFromMazeModelItem(modelItem));
+                    mockItem = new Client(getRandomDirection());
                 else if (modelItem.isServer())
-                    mockItem = new Server(getDirectionFromMazeModelItem(modelItem));
+                    mockItem = new Server(getRandomDirection());
                 else if (modelItem.isTriWayWire())
-                    mockItem = new TriWayWire(getDirectionFromMazeModelItem(modelItem));
+                    mockItem = new TriWayWire(getRandomDirection());
                 else if (modelItem.isNinetyDegreeWire())
-                    mockItem = new NinetyDegreeWire(Direction.UP);
+                    mockItem = new NinetyDegreeWire(getRandomDirection());
                 else 
-                    mockItem = new StraightWire(Direction.UP);
+                    mockItem = new StraightWire(getRandomDirection());
                 
                 mazeItems[xCurrent][yCurrent] = mockItem;
             }
@@ -109,6 +110,24 @@ public class Model
         
         
         return direction;
+    }
+    
+    private Direction getRandomDirection()
+    {
+        Direction randomDirection = null;
+        Integer randomNumber = (int)(Math.random() * 4);
+        
+        if (randomNumber.equals(0))
+            return Direction.UP;
+        if (randomNumber.equals(1))
+            return Direction.DOWN;
+        if (randomNumber.equals(2))
+            return Direction.LEFT;
+        if (randomNumber.equals(3))
+            return Direction.RIGHT;
+        
+        
+        return randomDirection;
     }
     
     private Boolean isMazeSolved()
