@@ -3,6 +3,7 @@ package controller;
 import java.util.concurrent.BlockingQueue;
 
 import events.NetwalkEvent;
+import model.MazeGenerator;
 import model.Model;
 import view.View;
 
@@ -29,6 +30,7 @@ public class Controller
         this.model = model;
         this.view = view;
         this.eventQueue = eventQueue;
+        
         
         eventQueueLoop();
     }
@@ -58,7 +60,6 @@ public class Controller
      */
     private void processEvent(NetwalkEvent newEvent)
     {
-        //TODO Is such way of event handling a good idea?
         newEvent.process(view, model);
     }
     

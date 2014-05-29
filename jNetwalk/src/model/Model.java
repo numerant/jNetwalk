@@ -3,7 +3,7 @@ package model;
 import java.awt.Image;
 
 import view.View;
-import model.MazeItem.Direction;
+import model.MazeMockItem.Direction;
 import model.MazeItems.*;
 
 
@@ -19,7 +19,10 @@ public class Model
 {
     private View view;
     private Integer mazeSize;
-    private MazeItem[][] mazeItems;
+    private Integer moveCount = 0;
+    private MazeMockItem[][] mazeItems;
+    private MazeModelItem[][] mazeModel;
+ 
     
     /**
      * Constructor - sets reference to view
@@ -35,25 +38,82 @@ public class Model
      */
     public void generateMaze(Integer size)
     {
+        MazeGenerator generator = new MazeGenerator(size);
+        mazeModel = generator.generateMazeModel();
         this.mazeSize = size;
-        mazeItems = new MazeItem[size][size];
-        fakeMazeGenerator();            //TODO Implement maze algorithm instead of "fake generator"
+        mazeItems = new MazeMockItem[size][size];
+        //fakeMockGenerator();            //TODO Implement maze algorithm instead of "fake generator"
+        realMockGenerator();
         sendMock();
     }
     
-        /** FOR REMOVAL - JUST FOR THE TESTING PURPOSES */
-    private void fakeMazeGenerator()
+    private void realMockGenerator()
     {
+        
         for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
             for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
             {
-                Wire newItem = new NinetyDegreeWire(Direction.RIGHT);
-                mazeItems[xCurrent][yCurrent] = newItem;
+                MazeModelItem modelItem = mazeModel[xCurrent][yCurrent];
+                MazeMockItem mockItem = null;
+                
+                if (modelItem.isClient())
+                    mockItem = new Client(getRandomDirection());
+                else if (modelItem.isServer())
+                    mockItem = new Server(getRandomDirection());
+                else if (modelItem.isTriWayWire())
+                    mockItem = new TriWayWire(getRandomDirection());
+                else if (modelItem.isNinetyDegreeWire())
+                    mockItem = new NinetyDegreeWire(getRandomDirection());
+                else 
+                    mockItem = new StraightWire(getRandomDirection());
+                
+                mazeItems[xCurrent][yCurrent] = mockItem;
             }
-        mazeItems[2][4] = new Server(Direction.DOWN);
-        mazeItems[0][2] = new Client(Direction.RIGHT);
-        mazeItems[2][3].setIsConnected(true);
-        mazeItems[0][3] = new Client(Direction.RIGHT);
+    }
+    
+    /**
+     * Takes direction from {@link MazeModelItem} object and converts it to {@link Direction} enumerator
+     * @param modelItem - object to convert
+     * @return {@link Direction} object
+     */
+    private Direction getDirectionFromMazeModelItem(final MazeModelItem modelItem)
+    {
+        Direction direction = null;
+        
+        if (modelItem.isClient() || modelItem.isServer())
+        {
+            if (modelItem.isDownNeighborConnected())
+                direction = Direction.DOWN;
+            else if (modelItem.isUpNeighborConnected())
+                direction = Direction.UP;
+            else if (modelItem.isLeftNeighborConnected())
+                direction = Direction.LEFT;
+            else if (modelItem.isRightNeighborConnected())
+                direction = Direction.RIGHT;
+        }
+        else direction = Direction.UP;  //TODO add wires
+        
+        
+        return direction;
+    }
+    
+    //TODO comment getRandomDirection
+    private Direction getRandomDirection()
+    {
+        Direction randomDirection = null;
+        Integer randomNumber = (int)(Math.random() * 4);
+        
+        if (randomNumber.equals(0))
+            return Direction.UP;
+        if (randomNumber.equals(1))
+            return Direction.DOWN;
+        if (randomNumber.equals(2))
+            return Direction.LEFT;
+        if (randomNumber.equals(3))
+            return Direction.RIGHT;
+        
+        
+        return randomDirection;
     }
     
     private Boolean isMazeSolved()
@@ -80,19 +140,22 @@ public class Model
     }
     
     /**
-     * Rotates {@link MazeItem} object of specified coordinates.
+     * Rotates {@link MazeMockItem} object of specified coordinates.
      * Invokes function checking how the maze has changed.
      * Notifies view of changes.
-     * @param xPosition - horizontal position of {@link MazeItem} in a grid
-     * @param yPosition - vertical position of {@link MazeItem} in a grid
+     * @param xPosition - horizontal position of {@link MazeMockItem} in a grid
+     * @param yPosition - vertical position of {@link MazeMockItem} in a grid
      */
     public void rotateItem(final Integer xPosition, final Integer yPosition)
     {
         mazeItems[xPosition][yPosition].rotate();
         
+        moveCount++;
+        view.setMoveCount(moveCount);
+        
         if (isMazeSolved())
         {
-            //notify view that the game is finished
+            //TODO notify view that the game is finished
         }
         else
         {
@@ -100,4 +163,5 @@ public class Model
         }
         
     }
+    
 }

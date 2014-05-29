@@ -6,9 +6,7 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.BlockingQueue;
 
-import events.GenerateMazeEvent;
 import events.NetwalkEvent;
-import events.ShowButtonCoordinatesEvent;
 
 /**
  * Class representing view in MVC. Creates interface and main window.
@@ -22,6 +20,7 @@ public class View
     private BlockingQueue<NetwalkEvent> eventQueue; 
     private JFrame frame;
     private Maze maze;
+    private StatusBar statusBar;
 
     /**
      * Constructor - sets event queue for communication with controller and calls (in EDT) method responsible for creation of GUI
@@ -53,12 +52,13 @@ public class View
     {
         createMainWindow();
         new MainMenu(this);
-        new StatusBar(this);        //TODO Status bar should be shown after maze creation
+        statusBar = new StatusBar(this);        //TODO Status bar should be shown after maze creation
         
         frame.setSize(400, 400);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
+        frame.setTitle("jNetwalk");
     }
 
     /**
@@ -102,6 +102,7 @@ public class View
     
     /**
      * Adds panel to the main window
+     * Doesn't need to run in EDT, as it's called by methods already running in this thread
      * @param panel - {@link JPanel} object to add
      * @param layout - {@link BorderLayout} layout type string
      */
@@ -111,7 +112,11 @@ public class View
         frame.pack();
     }
 
-    
+    /**
+     * Removes previous game panel from the main window and creates new one.
+     * 
+     * @param size - size of the new maze
+     */
     public void createMazePanel(final Integer size)
     {
         final View view = this;
@@ -119,7 +124,17 @@ public class View
         {
             public void run() 
             {
+                    /* Remove previous panel if it does exist */
+                if (maze != null)       
+                {
+                    frame.getContentPane().remove(maze.getMazePanel());
+                    maze = null;
+                }
+                
+                    /* Create new maze panel and show it */
                 maze = new Maze(view, size);
+                
+                //TODO is frame.revalidate() needed?
             }
         });
     }
@@ -141,13 +156,46 @@ public class View
         });
     }
     
-    public void showMessage(final String message) //TODO Testing only - for removal!
+    /**
+     * Wrapper for setting move count on status bar
+     * @param moveCount - number of moves to set as label
+     */
+    public void setMoveCount(final Integer moveCount)
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                statusBar.setMoveCountValue(moveCount);
+            }
+        });
+    }
+    
+    /**
+     * Shows specified message as a message box on the screen.
+     * @param message - message to show
+     */
+    public void showMessage(final String message)
     {
         EventQueue.invokeLater(new Runnable()
         {
             public void run() 
             {
                 JOptionPane.showMessageDialog(null, message);
+            }
+        });
+    }
+    
+    /**
+     * Wrapper method for showing help dialog.
+     */
+    public void showHelp()
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                new HelpWindow(frame);
             }
         });
     }
