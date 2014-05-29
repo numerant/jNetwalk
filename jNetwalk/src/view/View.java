@@ -181,7 +181,7 @@ public class View
         {
             public void run() 
             {
-                JOptionPane.showMessageDialog(null, message);
+                JOptionPane.showMessageDialog(frame, message);
             }
         });
     }

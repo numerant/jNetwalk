@@ -28,7 +28,6 @@ public class MainMenu
     private JMenuItem difficulyMediumItem;
     private JMenuItem difficulyHardItem;
     private JMenuItem difficulyVeryHardItem;
-    private JMenuItem highScoresMenuItem;
     private JMenuItem quitMenuItem;
     private JMenu helpMenu;
     private JMenuItem howToPlayMenuItem;
@@ -101,9 +100,6 @@ public class MainMenu
         newGameMenu.add(difficulyVeryHardItem);
         
         
-        highScoresMenuItem = new JMenuItem("High scores");
-        gameMenu.add(highScoresMenuItem);
-        
         quitMenuItem = new JMenuItem("Quit");
         quitMenuItem.addActionListener(new ActionListener()
         {
@@ -129,6 +125,13 @@ public class MainMenu
         
         aboutMenuItem = new JMenuItem("About");
         helpMenu.add(aboutMenuItem);
+        aboutMenuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                view.sendNetwalkEvent(new ShowAboutEvent());
+            }
+        });
         
     }
     

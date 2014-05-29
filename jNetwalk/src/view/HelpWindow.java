@@ -37,6 +37,7 @@ public class HelpWindow extends JDialog
     private void showDialog()
     {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
         setVisible(true);
     }
 
@@ -45,7 +46,8 @@ public class HelpWindow extends JDialog
      */
     private void createDialog()
     {
-        setBounds(100, 100, 450, 235);
+        setSize(450, 235);
+        
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
