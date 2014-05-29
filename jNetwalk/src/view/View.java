@@ -102,6 +102,7 @@ public class View
     
     /**
      * Adds panel to the main window
+     * Doesn't need to run in EDT, as it's called by methods already running in this thread
      * @param panel - {@link JPanel} object to add
      * @param layout - {@link BorderLayout} layout type string
      */
@@ -111,7 +112,11 @@ public class View
         frame.pack();
     }
 
-    
+    /**
+     * Removes previous game panel from the main window and creates new one.
+     * 
+     * @param size - size of the new maze
+     */
     public void createMazePanel(final Integer size)
     {
         final View view = this;
@@ -119,7 +124,17 @@ public class View
         {
             public void run() 
             {
+                    /* Remove previous panel if it does exist */
+                if (maze != null)       
+                {
+                    frame.getContentPane().remove(maze.getMazePanel());
+                    maze = null;
+                }
+                
+                    /* Create new maze panel and show it */
                 maze = new Maze(view, size);
+                
+                //TODO is frame.revalidate() needed?
             }
         });
     }
@@ -141,7 +156,11 @@ public class View
         });
     }
     
-    public void showMessage(final String message) //TODO Testing only - for removal!
+    /**
+     * Shows specified message as a message box on the screen.
+     * @param message - message to show
+     */
+    public void showMessage(final String message)
     {
         EventQueue.invokeLater(new Runnable()
         {

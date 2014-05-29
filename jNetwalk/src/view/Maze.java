@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import events.GenerateMazeEvent;
 import events.RotateButtonEvent;
 import events.ShowButtonCoordinatesEvent;
 import view.NetwalkButton;
@@ -40,7 +39,6 @@ public class Maze
         this.mazeSize = size;
         
         createMazePanel();
-        
     }
     
     /** 
@@ -102,7 +100,18 @@ public class Maze
      */
     public void showMaze()
     {
+        
         view.addPanel(gamePanel, BorderLayout.CENTER);
+    }
+    
+    /**
+     * Returns reference to the JPanel object associated with current Maze.
+     * Useful for removing panel from main window.
+     * @return JPanel - associated panel
+     */
+    public JPanel getMazePanel()
+    {
+        return gamePanel;
     }
 }
 
