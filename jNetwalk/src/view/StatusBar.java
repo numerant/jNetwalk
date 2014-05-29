@@ -66,4 +66,13 @@ public class StatusBar
     {
         view.addPanel(statusBarPanel, BorderLayout.SOUTH);
     }
+    
+    /**
+     * Setter for moveCountValue
+     * @param moveCount number to set
+     */
+    public void setMoveCountValue(final Integer moveCount)
+    {
+        moveCountValue.setText(moveCount.toString());
+    }
 }

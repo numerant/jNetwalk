@@ -119,6 +119,13 @@ public class MainMenu
         
         howToPlayMenuItem = new JMenuItem("How to play");
         helpMenu.add(howToPlayMenuItem);
+        howToPlayMenuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                view.sendNetwalkEvent(new ShowHelpEvent());
+            }
+        });
         
         aboutMenuItem = new JMenuItem("About");
         helpMenu.add(aboutMenuItem);

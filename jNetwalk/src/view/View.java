@@ -20,6 +20,7 @@ public class View
     private BlockingQueue<NetwalkEvent> eventQueue; 
     private JFrame frame;
     private Maze maze;
+    private StatusBar statusBar;
 
     /**
      * Constructor - sets event queue for communication with controller and calls (in EDT) method responsible for creation of GUI
@@ -51,7 +52,7 @@ public class View
     {
         createMainWindow();
         new MainMenu(this);
-        new StatusBar(this);        //TODO Status bar should be shown after maze creation
+        statusBar = new StatusBar(this);        //TODO Status bar should be shown after maze creation
         
         frame.setSize(400, 400);
         frame.setLocationByPlatform(true);
@@ -156,6 +157,21 @@ public class View
     }
     
     /**
+     * Wrapper for setting move count on status bar
+     * @param moveCount - number of moves to set as label
+     */
+    public void setMoveCount(final Integer moveCount)
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                statusBar.setMoveCountValue(moveCount);
+            }
+        });
+    }
+    
+    /**
      * Shows specified message as a message box on the screen.
      * @param message - message to show
      */
@@ -166,6 +182,20 @@ public class View
             public void run() 
             {
                 JOptionPane.showMessageDialog(null, message);
+            }
+        });
+    }
+    
+    /**
+     * Wrapper method for showing help dialog.
+     */
+    public void showHelp()
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                new HelpWindow(frame);
             }
         });
     }

@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Image;
-import java.util.Random;
 
 import view.View;
 import model.MazeMockItem.Direction;
@@ -20,6 +19,7 @@ public class Model
 {
     private View view;
     private Integer mazeSize;
+    private Integer moveCount = 0;
     private MazeMockItem[][] mazeItems;
     private MazeModelItem[][] mazeModel;
  
@@ -45,21 +45,6 @@ public class Model
         //fakeMockGenerator();            //TODO Implement maze algorithm instead of "fake generator"
         realMockGenerator();
         sendMock();
-    }
-    
-        /** FOR REMOVAL - JUST FOR THE TESTING PURPOSES */
-    private void fakeMockGenerator()
-    {
-        for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
-            for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
-            {
-                Wire newItem = new TriWayWire(Direction.RIGHT);
-                mazeItems[xCurrent][yCurrent] = newItem;
-            }
-        mazeItems[2][4] = new Server(Direction.DOWN);
-        mazeItems[0][2] = new Client(Direction.RIGHT);
-        mazeItems[2][3].setIsConnected(true);
-        mazeItems[0][3] = new Client(Direction.RIGHT);
     }
     
     private void realMockGenerator()
@@ -106,12 +91,13 @@ public class Model
             else if (modelItem.isRightNeighborConnected())
                 direction = Direction.RIGHT;
         }
-        else direction = Direction.UP;
+        else direction = Direction.UP;  //TODO add wires
         
         
         return direction;
     }
     
+    //TODO comment getRandomDirection
     private Direction getRandomDirection()
     {
         Direction randomDirection = null;
@@ -164,9 +150,12 @@ public class Model
     {
         mazeItems[xPosition][yPosition].rotate();
         
+        moveCount++;
+        view.setMoveCount(moveCount);
+        
         if (isMazeSolved())
         {
-            //notify view that the game is finished
+            //TODO notify view that the game is finished
         }
         else
         {
