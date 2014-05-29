@@ -59,6 +59,7 @@ public class View
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
+        frame.setTitle("jNetwalk");
     }
 
     /**
