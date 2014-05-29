@@ -6,9 +6,7 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.BlockingQueue;
 
-import events.GenerateMazeEvent;
 import events.NetwalkEvent;
-import events.ShowButtonCoordinatesEvent;
 
 /**
  * Class representing view in MVC. Creates interface and main window.

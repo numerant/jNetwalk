@@ -17,11 +17,10 @@ public class MazeGenerator      //TODO: maybe make it static?
     {
         this.mazeSize = size;
         generateMazeModel();
-        
     }
     
     /**
-     * Makes every item in the array aware of its position
+     * Initializes every item in the array and makes them aware of their positions
      */
     private void initializeMazeModelArray()
     {
@@ -87,7 +86,6 @@ public class MazeGenerator      //TODO: maybe make it static?
             addNodeToCheck(randomNeighbor);
             
         }
-        printTable();
         return mazeModel;
     }
     
@@ -98,8 +96,6 @@ public class MazeGenerator      //TODO: maybe make it static?
     private void updateItemNeighborhood(MazeModelItem item)
     {
         item.setTakenNeighborCount(0);
-        
-        
         
         Integer xPosition = item.getXPosition();
         Integer yPosition = item.getYPosition();
@@ -133,6 +129,11 @@ public class MazeGenerator      //TODO: maybe make it static?
         item.setTakenNeighborCount(takenNeighborCount);
     }
     
+    /**
+     * Finds random free neighbor of specified item and initializes it
+     * @param item - node to find a new neighbor for
+     * @return {@link MazeModelItem} - reference to the new neighbor
+     */
     private MazeModelItem createRandomNeighbor(MazeModelItem item)
     {
             /* Maximum count of taken neighbors is 4 */
@@ -140,7 +141,6 @@ public class MazeGenerator      //TODO: maybe make it static?
             /* No free neighbors - return null */
         if (freeNeighborsCount.equals(0))
         {
-            System.out.println("Pupa");
             return null;
         }
         
@@ -238,29 +238,6 @@ public class MazeGenerator      //TODO: maybe make it static?
         Integer randomNumber = (int)(Math.random() * nodesToCheck.size());
         return nodesToCheck.get(randomNumber);
         
-    }
-    
-    private void printTable()
-    {
-        for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
-        {
-            for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
-            {
-                MazeModelItem currentItem = mazeModel[xCurrent][yCurrent];
-                
-                if (currentItem.isClient())
-                    System.out.print("C ");
-                else if (currentItem.isServer())
-                    System.out.print("S ");
-                else if (currentItem.isTriWayWire())
-                    System.out.print("3 ");
-                else if (currentItem.isNinetyDegreeWire())
-                    System.out.print("< ");
-                else
-                    System.out.print("| ");
-            }
-            System.out.println("");
-        }
     }
         
 }

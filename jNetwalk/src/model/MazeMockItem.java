@@ -17,6 +17,9 @@ import model.MazeItems.Server;
  */
 public abstract class MazeMockItem
 {
+    /**
+     * Describes direction of the item on the maze
+     */
     public static enum Direction
     {
         UP, DOWN, LEFT, RIGHT
@@ -27,7 +30,7 @@ public abstract class MazeMockItem
     protected Direction direction;
     protected Boolean isConnected;
     
-    public MazeMockItem() {}        //TODO: is it needed?
+    public MazeMockItem() {}
     
     /**
      * Returns an {@link Image} object containing picture of MazeItem's current state
@@ -56,7 +59,26 @@ public abstract class MazeMockItem
                 break;
         }
     }
+
+    /**
+     * Getter for direction field - used in {@link ItemImages}
+     */
+    public Direction getDirection()
+    {
+        return this.direction;
+    }
     
+    /**
+     * Getter for isConnected field - used in {@link ItemImages}
+     */
+    public Boolean isConnected()
+    {
+        return this.isConnected;
+    }
+    
+    /**
+     * Setter for isConnected field
+     */
     public void setIsConnected(Boolean isConnected)
     {
         this.isConnected = isConnected;
