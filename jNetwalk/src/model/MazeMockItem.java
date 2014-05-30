@@ -1,10 +1,6 @@
 package model;
 
 import java.awt.Image;
-import java.io.IOException;
-import java.util.EnumMap;
-
-import javax.imageio.ImageIO;
 
 import model.MazeItems.Server;
 
@@ -79,9 +75,12 @@ public abstract class MazeMockItem
     /**
      * Setter for isConnected field
      */
-    public void setIsConnected(Boolean isConnected)
+    public void setIsConnectedToTheInternet(Boolean isConnected)
     {
-        this.isConnected = isConnected;
+        if (this instanceof Server)      //server is always connected
+            this.isConnected = true;
+        else
+            this.isConnected = isConnected;
     }
     
 }

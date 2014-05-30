@@ -52,7 +52,7 @@ public class View
     {
         createMainWindow();
         new MainMenu(this);
-        statusBar = new StatusBar(this);        //TODO Status bar should be shown after maze creation
+        statusBar = new StatusBar(this);
         
         frame.setSize(400, 400);
         
@@ -114,6 +114,20 @@ public class View
     }
 
     /**
+     * Hides maze panel
+     */
+    public void hideMazePanel()
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                maze.getMazePanel().setVisible(false);
+            }
+        });
+    }
+    
+    /**
      * Removes previous game panel from the main window and creates new one.
      * 
      * @param size - size of the new maze
@@ -135,7 +149,6 @@ public class View
                     /* Create new maze panel and show it */
                 maze = new Maze(view, size);
                 
-                //TODO is frame.revalidate() needed?
             }
         });
     }

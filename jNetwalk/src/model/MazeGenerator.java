@@ -2,18 +2,19 @@ package model;
 
 import java.util.Vector;
 
-import com.sun.org.apache.bcel.internal.generic.ISUB;
-
 /**
  * Class responsible for the process of generating game maze
  * @author Jakub Maleszewski
  * @since 2014-05-27
  */
-public class MazeGenerator      //TODO: maybe make it static?
+public class MazeGenerator
 {
     private Integer mazeSize;
     private MazeModelItem mazeModel[][];
     private Vector<MazeModelItem> nodesToCheck;
+    
+    private Integer serverXCoordinate;
+    private Integer serverYCoordinate;
     
     public MazeGenerator(Integer size)
     {
@@ -37,11 +38,11 @@ public class MazeGenerator      //TODO: maybe make it static?
      * The main maze generation method.
      * Uses simplified Prim's algorithm for finding the spanning tree
      */
-    public MazeModelItem[][] generateMazeModel()      //TODO Maze generation algorithm will be just here!
+    public MazeModelItem[][] generateMazeModel()
     {
         nodesToCheck = new Vector<MazeModelItem>();
-        Integer serverXCoordinate = (int)(Math.random() * mazeSize);    //TODO check if generated numbers are from the right range
-        Integer serverYCoordinate = (int)(Math.random() * mazeSize);
+        serverXCoordinate = (int)(Math.random() * mazeSize);
+        serverYCoordinate = (int)(Math.random() * mazeSize);
         
         mazeModel = new MazeModelItem[mazeSize][mazeSize];
         MazeModelItem currentItem;
@@ -242,6 +243,25 @@ public class MazeGenerator      //TODO: maybe make it static?
         
     }
     
+    /**
+     * Getter for serverXCoordinate field
+     * Needed for checking if maze is solved
+     * @return {@link Integer} server X position
+     */
+    public Integer getServerXCoordinate()
+    {
+        return serverXCoordinate;
+    }
+    
+    /**
+     * Getter for serverYCoordinate field
+     * Needed for checking if maze is solved
+     * @return {@link Integer} server Y position
+     */
+    public Integer getServerYCoordinate()
+    {
+        return serverYCoordinate;
+    }
 
         
 }

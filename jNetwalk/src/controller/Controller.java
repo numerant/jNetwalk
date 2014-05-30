@@ -3,7 +3,6 @@ package controller;
 import java.util.concurrent.BlockingQueue;
 
 import events.NetwalkEvent;
-import model.MazeGenerator;
 import model.Model;
 import view.View;
 

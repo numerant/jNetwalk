@@ -11,16 +11,12 @@ import javax.swing.JButton;
 public class NetwalkButton extends JButton
 {
     private static final long serialVersionUID = 1L;    // to suppress warnings
-    private Integer xPosition;
-    private Integer yPosition;
     
     /**
      * Constructor - sets button caption and maze position
      */
-    public NetwalkButton(final String string, final Integer xPosition, final Integer yPosition)
+    public NetwalkButton(final String string)
     {
         super(string);
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
     }
 }

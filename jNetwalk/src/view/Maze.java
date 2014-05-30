@@ -54,7 +54,7 @@ public class Maze
         for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
             for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
             {
-                final NetwalkButton newButton = new NetwalkButton("", xCurrent, yCurrent);
+                final NetwalkButton newButton = new NetwalkButton("");
                 newButton.setPreferredSize(new Dimension(BUTTON_SIZE_PX, BUTTON_SIZE_PX));
                
                 addRotateActionListener(newButton, xCurrent, yCurrent);
