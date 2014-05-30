@@ -43,6 +43,7 @@ public class Model
         this.mazeSize = size;
         mazeItems = new MazeMockItem[size][size];
         //fakeMockGenerator();            //TODO Implement maze algorithm instead of "fake generator"
+        randomlyRotateAllNodes();
         realMockGenerator();
         sendMock();
     }
@@ -132,24 +133,20 @@ public class Model
         return direction;
     }
     
-    //TODO remove getRandomDirection
-   /* private Direction getRandomDirection()
+    private void randomlyRotateAllNodes()
     {
-        Direction randomDirection = null;
-        Integer randomNumber = (int)(Math.random() * 4);
-        
-        if (randomNumber.equals(0))
-            return Direction.UP;
-        if (randomNumber.equals(1))
-            return Direction.DOWN;
-        if (randomNumber.equals(2))
-            return Direction.LEFT;
-        if (randomNumber.equals(3))
-            return Direction.RIGHT;
-        
-        
-        return randomDirection;
-    }*/
+        for (int yCurrent = 0; yCurrent < mazeSize; yCurrent++)
+            for (int xCurrent = 0; xCurrent < mazeSize; xCurrent++)
+            {
+                Integer randomNumber = (int)(Math.random() * 4);
+                MazeModelItem nodeToRotate = mazeModel[xCurrent][yCurrent];
+                
+                    /* rotate it random number of times */
+                nodeToRotate.rotate(randomNumber);
+            
+            }
+
+    }
     
     private Boolean isMazeSolved()
     {

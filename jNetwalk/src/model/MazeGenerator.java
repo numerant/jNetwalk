@@ -2,6 +2,8 @@ package model;
 
 import java.util.Vector;
 
+import com.sun.org.apache.bcel.internal.generic.ISUB;
+
 /**
  * Class responsible for the process of generating game maze
  * @author Jakub Maleszewski
@@ -239,5 +241,7 @@ public class MazeGenerator      //TODO: maybe make it static?
         return nodesToCheck.get(randomNumber);
         
     }
+    
+
         
 }

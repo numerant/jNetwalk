@@ -239,4 +239,28 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
         else return false;
     }
     
+    /**
+     * Rotates specified node counter-clockwise
+     * (by updating is*Connected parameters
+     */
+    public void rotate()
+    {
+        Boolean oldUpNeighborConnected = upNeighborConnected;
+        upNeighborConnected = rightNeighborConnected;
+        rightNeighborConnected = downNeighborConnected;
+        downNeighborConnected = leftNeighborConnected;
+        leftNeighborConnected = oldUpNeighborConnected;
+    }
+    
+    /**
+     * Rotates specified node counter-clockwise specified number of times
+     * @param rotationCount - how many times should we rotate it
+     */
+    public void rotate(Integer rotationCount)
+    {
+        for (int iterator=0; iterator<rotationCount; iterator++)
+            rotate();
+    }
+    
+    
 }
