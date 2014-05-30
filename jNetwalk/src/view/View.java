@@ -55,9 +55,10 @@ public class View
         statusBar = new StatusBar(this);        //TODO Status bar should be shown after maze creation
         
         frame.setSize(400, 400);
-        frame.setLocationByPlatform(true);
+        
+        frame.setResizable(false);              //Due to bug in Java positioning does not work as intended
+        frame.setLocationByPlatform(true);      //when both setResizable() and setLocationByPlatform() are used
         frame.setVisible(true);
-        frame.setResizable(false);  // It has to be set after making the window visible - otherwise positioning won't work as intended
         frame.setTitle("jNetwalk");
     }
 

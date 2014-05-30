@@ -1,5 +1,6 @@
 package view;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -132,7 +133,6 @@ public class MainMenu
                 view.sendNetwalkEvent(new ShowAboutEvent());
             }
         });
-        
     }
     
     /**

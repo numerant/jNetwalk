@@ -57,15 +57,15 @@ public class Model
                 MazeMockItem mockItem = null;
                 
                 if (modelItem.isClient())
-                    mockItem = new Client(getRandomDirection());
+                    mockItem = new Client(getDirectionFromMazeModelItem(modelItem));
                 else if (modelItem.isServer())
-                    mockItem = new Server(getRandomDirection());
+                    mockItem = new Server(getDirectionFromMazeModelItem(modelItem));
                 else if (modelItem.isTriWayWire())
-                    mockItem = new TriWayWire(getRandomDirection());
+                    mockItem = new TriWayWire(getDirectionFromMazeModelItem(modelItem));
                 else if (modelItem.isNinetyDegreeWire())
-                    mockItem = new NinetyDegreeWire(getRandomDirection());
+                    mockItem = new NinetyDegreeWire(getDirectionFromMazeModelItem(modelItem));
                 else 
-                    mockItem = new StraightWire(getRandomDirection());
+                    mockItem = new StraightWire(getDirectionFromMazeModelItem(modelItem));
                 
                 mazeItems[xCurrent][yCurrent] = mockItem;
             }
@@ -76,7 +76,7 @@ public class Model
      * @param modelItem - object to convert
      * @return {@link Direction} object
      */
-    private Direction getDirectionFromMazeModelItem(final MazeModelItem modelItem)
+    private Direction getDirectionFromMazeModelItem(final MazeModelItem modelItem)  //TODO maybe move it to mazeModelItem
     {
         Direction direction = null;
         
@@ -91,14 +91,49 @@ public class Model
             else if (modelItem.isRightNeighborConnected())
                 direction = Direction.RIGHT;
         }
-        else direction = Direction.UP;  //TODO add wires
+            /* Tri-way wire */
+        else if (modelItem.isTriWayWire())
+        {
+            if (modelItem.isLeftNeighborConnected() && modelItem.isUpNeighborConnected() && modelItem.isRightNeighborConnected())
+                direction = Direction.UP;
+            else if (modelItem.isLeftNeighborConnected() && modelItem.isDownNeighborConnected() && modelItem.isRightNeighborConnected())
+                direction = Direction.DOWN;
+            else if (modelItem.isLeftNeighborConnected() && modelItem.isUpNeighborConnected() && modelItem.isDownNeighborConnected())
+                direction = Direction.LEFT;
+            else
+                direction = Direction.RIGHT;
+        }
+            /* 90-degree wire */
+        else if (modelItem.isNinetyDegreeWire())
+        {
+            if (modelItem.isUpNeighborConnected() && modelItem.isRightNeighborConnected() )
+                direction = Direction.UP;
+            else if (modelItem.isDownNeighborConnected() && modelItem.isLeftNeighborConnected())
+                direction = Direction.DOWN;
+            else if (modelItem.isLeftNeighborConnected() && modelItem.isUpNeighborConnected())
+                direction = Direction.LEFT;
+            else
+                direction = Direction.RIGHT;
+        }
+            /* Straight wire */
+        else 
+        {
+            if (modelItem.areBothUpAndDownConnected())
+            {
+                return Direction.UP;    // it doesn't matter if it's UP or DOWN - it looks the same
+            }
+            else if (modelItem.areBothLeftAndRightConnected())
+            {
+                return Direction.LEFT;  // it doesn't matter if it's LEFT or RIGHT - it looks the same
+            }
+        }
         
         
         return direction;
     }
     
-    //TODO comment getRandomDirection
-    private Direction getRandomDirection()
+    //TODO remove getRandomDirection
+   /* private Direction getRandomDirection()
     {
         Direction randomDirection = null;
         Integer randomNumber = (int)(Math.random() * 4);
@@ -114,7 +149,7 @@ public class Model
         
         
         return randomDirection;
-    }
+    }*/
     
     private Boolean isMazeSolved()
     {

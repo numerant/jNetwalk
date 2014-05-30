@@ -221,12 +221,20 @@ public class MazeModelItem      //TODO It should probably be a double-linked lis
             return true;
         else return false;
     }
+        //TODO komentarze!!!
+    public Boolean areBothUpAndDownConnected()
+    {
+        return upNeighborConnected && downNeighborConnected;
+    }
+    
+    public Boolean areBothLeftAndRightConnected()
+    {
+        return leftNeighborConnected && rightNeighborConnected;
+    }
     
     public Boolean isNinetyDegreeWire()
     {
-        Boolean areBothUpAndDownConnected = upNeighborConnected && downNeighborConnected;
-        Boolean areBothLeftAndRightConnected = leftNeighborConnected && rightNeighborConnected;
-        if (connectedNeighborCount.equals(2) && !areBothLeftAndRightConnected && !areBothUpAndDownConnected)
+        if (connectedNeighborCount.equals(2) && !areBothLeftAndRightConnected() && !areBothUpAndDownConnected())
             return true;
         else return false;
     }
