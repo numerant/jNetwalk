@@ -76,6 +76,10 @@ public class Model
         sendMock();
     }
     
+    /**
+     * Generates mock based on MazeModelItem array containing maze
+     * @param mazeModel - maze to generate mock from
+     */
     private void realMockGenerator(MazeModelItem[][] mazeModel)
     {
         
@@ -209,11 +213,7 @@ public class Model
         
         sendMock();
         if (isMazeSolved())
-        {
-            System.out.println("Wygrales!");
-            view.sendNetwalkEvent(new ShowYouWonEvent(moveCount, 0));
-            view.hideMazePanel();
-        }
+            view.sendNetwalkEvent(new ShowYouWonEvent(moveCount));
         
         
     }
@@ -327,6 +327,11 @@ public class Model
         copyInternetConnectionsToMock();
     }
     
+    /**
+     * Checks if items contained in {@link ItemPair} object are connected
+     * @param itemPair object to compare
+     * @return {@link Boolean} - is pair connected
+     */
     private Boolean isItemPairConnected(ItemPair itemPair)
     {
         if (itemPair.sourceDirection == Direction.UP)

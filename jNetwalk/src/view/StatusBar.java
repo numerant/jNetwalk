@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,8 +21,6 @@ public class StatusBar
     private View view;
         /* Status bar items */
     private JPanel statusBarPanel;
-    private JLabel timeLabel;
-    private JLabel timeValue;
     private JLabel moveCountLabel;
     private JLabel moveCountValue;
     
@@ -41,13 +38,6 @@ public class StatusBar
     {
         statusBarPanel = new JPanel();
         statusBarPanel.setLayout(new BoxLayout(statusBarPanel, BoxLayout.X_AXIS));
-        
-        timeLabel = new JLabel("Time:");
-        statusBarPanel.add(timeLabel);
-        
-        timeValue = new JLabel("");
-        timeValue.setAlignmentX(Component.CENTER_ALIGNMENT);
-        statusBarPanel.add(timeValue);
         
         statusBarPanel.add(Box.createHorizontalGlue());
         

@@ -11,12 +11,10 @@ import view.View;
 public class ShowYouWonEvent extends NetwalkEvent
 {
     private Integer moveCount;
-    private Integer time;
     
-    public ShowYouWonEvent (final Integer moveCount, final Integer time)
+    public ShowYouWonEvent (final Integer moveCount)
     {
         this.moveCount = moveCount;
-        this.time = time;
     }
     
     /**
@@ -24,10 +22,11 @@ public class ShowYouWonEvent extends NetwalkEvent
      */
     public void process(View view, Model model)
     {
-        String message = "<html>You won this game!<br>Moves: " + moveCount.toString() + "<br>Time: "+ time.toString() +"</html>";
+        String message = "<html>You won this game!<br>Moves: " + moveCount.toString() +"</html>";
         String title = "Congratulations!";
 
         view.showMessage(message, title);
+        view.hideMazePanel();
     }
 
 }

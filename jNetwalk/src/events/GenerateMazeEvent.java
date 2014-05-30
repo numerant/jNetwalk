@@ -23,6 +23,7 @@ public class GenerateMazeEvent extends NetwalkEvent
      */
     public void process(final View view, final Model model)
     {
+        view.setMoveCount(0);
         view.createMazePanel(size);
         model.generateMaze(size);
     }

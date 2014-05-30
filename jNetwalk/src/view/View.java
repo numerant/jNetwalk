@@ -52,7 +52,7 @@ public class View
     {
         createMainWindow();
         new MainMenu(this);
-        statusBar = new StatusBar(this);
+        statusBar = new StatusBar(this);    //TODO add timer!
         
         frame.setSize(400, 400);
         
@@ -191,13 +191,24 @@ public class View
      */
     public void showMessage(final String message, final String title)
     {
-        EventQueue.invokeLater(new Runnable()
+        try
         {
-            public void run() 
+            EventQueue.invokeAndWait(new Runnable()
             {
-                JOptionPane.showMessageDialog(frame, message, title, JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+                public void run() 
+                {
+                    JOptionPane.showMessageDialog(frame, message, title, JOptionPane.INFORMATION_MESSAGE);
+                }
+            });
+        }
+        catch (InvocationTargetException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     /**
