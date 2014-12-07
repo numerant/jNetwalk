@@ -26,6 +26,7 @@ public class ShowYouWonEvent extends NetwalkEvent
         String title = "Congratulations!";
 
         view.showMessage(message, title);
+        view.setMoveCount(0);
         view.hideMazePanel();
     }
 
