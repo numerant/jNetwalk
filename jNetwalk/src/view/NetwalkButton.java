@@ -18,5 +18,6 @@ public class NetwalkButton extends JButton
     public NetwalkButton(final String string)
     {
         super(string);
+        this.setContentAreaFilled(false);
     }
 }
