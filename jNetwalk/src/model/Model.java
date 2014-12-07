@@ -44,10 +44,9 @@ public class Model
     
     private View view;
     private Integer mazeSize;
-    private Integer moveCount = 0;
+    private Integer moveCount;
     private MazeMockItem[][] mazeItems;
     private MazeModelItem[][] mazeModel;
-    private MazeModelItem[][] mazeModelUnmodified;
     private MazeGenerator generator;
  
     
@@ -67,8 +66,8 @@ public class Model
     {
         generator = new MazeGenerator(size);
         mazeModel = generator.generateMazeModel();  //TODO add option to show correct solution
-        mazeModelUnmodified = mazeModel;    // we will change items in mazeModel later - this is needed to show the right solution of the maze 
-        this.mazeSize = size;
+        mazeSize = size;
+        moveCount = 0;
         mazeItems = new MazeMockItem[size][size];
         randomlyRotateAllNodes();
         realMockGenerator(mazeModel);
